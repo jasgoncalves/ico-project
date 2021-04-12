@@ -6,11 +6,9 @@ import java.io.Serializable
 data class Problem(
        val name : String ,
        val objectPurpose : String ,
-       val constructors : ArrayList<MetadataConstructor> ,
-       val methods : ArrayList<MetadataMethod>
+       val constructors : ArrayList<MetadataConstructor>? = ArrayList() ,
+       val methods : ArrayList<MetadataMethod>? = ArrayList()
 ) : Entity , Serializable {
-
-    private val serialVersionUID : Long = 1L;
 
     override fun toString(): String =
         "{" +

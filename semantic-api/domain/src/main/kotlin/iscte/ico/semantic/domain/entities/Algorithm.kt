@@ -6,11 +6,10 @@ import java.io.Serializable
 data class Algorithm(
     val name : String ,
     val objectPurpose : String ,
-    val constructors : ArrayList<MetadataConstructor> ,
-    val methods : ArrayList<MetadataMethod>
+    val hasBuilder: Boolean? = false,
+    val constructors : ArrayList<MetadataConstructor>? = ArrayList() ,
+    val methods : ArrayList<MetadataMethod>? = ArrayList()
 ) : Entity , Serializable {
-
-    private val serialVersionUID : Long = 1L;
 
     override fun toString(): String =
         "{" +

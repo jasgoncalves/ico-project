@@ -5,8 +5,6 @@ import java.io.Serializable
 
 data class MetadataConstructor(val name: String, val args: Any) : Entity , Serializable {
 
-    private val serialVersionUID : Long = 1L;
-
     override fun toString(): String =
         "{" +
         "\"name\"=\"$name\"," +
