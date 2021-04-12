@@ -10,7 +10,7 @@ data class AlgorithmsProblems(
     val problems : MutableList<Problem>
 ) : Entity , Serializable {
 
-    private val serialVersionUID : Long = 1L;
+    private val serialVersionUID : Long = 1L
 
     override fun toString(): String =
         "{" +
