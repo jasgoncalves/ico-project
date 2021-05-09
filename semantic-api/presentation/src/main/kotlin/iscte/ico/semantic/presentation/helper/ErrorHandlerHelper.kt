@@ -6,7 +6,6 @@ import org.springframework.beans.TypeMismatchException
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.lang.Nullable
 import org.springframework.validation.BindException
 import org.springframework.web.HttpMediaTypeNotSupportedException
 import org.springframework.web.HttpRequestMethodNotSupportedException
@@ -14,8 +13,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.MissingServletRequestParameterException
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
-import org.springframework.web.client.HttpClientErrorException
-import org.springframework.web.client.HttpStatusCodeException
 import org.springframework.web.context.request.WebRequest
 import org.springframework.web.multipart.support.MissingServletRequestPartException
 import org.springframework.web.servlet.NoHandlerFoundException
@@ -41,43 +38,43 @@ class ErrorHandlerHelper: ResponseEntityExceptionHandler() {
     ) : ResponseEntity<Any> =
             customizedErrorHandler(status, headers, ex)
 
-    override fun handleMissingServletRequestPart(
-            ex : MissingServletRequestPartException , headers : HttpHeaders , status : HttpStatus , request : WebRequest
-    ) : ResponseEntity<Any> =
-            customizedErrorHandler(status, headers, ex)
+//    override fun handleMissingServletRequestPart(
+//            ex : MissingServletRequestPartException , headers : HttpHeaders , status : HttpStatus , request : WebRequest
+//    ) : ResponseEntity<Any> =
+//            customizedErrorHandler(status, headers, ex)
 
-    override fun handleMissingServletRequestParameter(
-            ex : MissingServletRequestParameterException , headers : HttpHeaders , status : HttpStatus , request : WebRequest
-    ) : ResponseEntity<Any> =
-            customizedErrorHandler(status, headers, ex)
+//    override fun handleMissingServletRequestParameter(
+//            ex : MissingServletRequestParameterException , headers : HttpHeaders , status : HttpStatus , request : WebRequest
+//    ) : ResponseEntity<Any> =
+//            customizedErrorHandler(status, headers, ex)
 
     //endregion
 
     //region 404 - NotFound
 
-    override fun handleNoHandlerFoundException(
-            ex : NoHandlerFoundException , headers : HttpHeaders , status : HttpStatus , request : WebRequest
-    ) : ResponseEntity<Any> =
-            customizedErrorHandler(status, headers, ex)
+//    override fun handleNoHandlerFoundException(
+//            ex : NoHandlerFoundException , headers : HttpHeaders , status : HttpStatus , request : WebRequest
+//    ) : ResponseEntity<Any> =
+//            customizedErrorHandler(status, headers, ex)
 
 
     //endregion
 
     //region 405 - MethodNotAllowed
 
-    override fun handleHttpRequestMethodNotSupported(
-            ex : HttpRequestMethodNotSupportedException , headers : HttpHeaders , status : HttpStatus , request : WebRequest
-    ) : ResponseEntity<Any> =
-            customizedErrorHandler(status, headers, ex)
+//    override fun handleHttpRequestMethodNotSupported(
+//            ex : HttpRequestMethodNotSupportedException , headers : HttpHeaders , status : HttpStatus , request : WebRequest
+//    ) : ResponseEntity<Any> =
+//            customizedErrorHandler(status, headers, ex)
 
     //endregion
 
     //region 415 - UnsupportedMediaType
 
-    override fun handleHttpMediaTypeNotSupported(
-            ex : HttpMediaTypeNotSupportedException , headers : HttpHeaders , status : HttpStatus , request : WebRequest
-    ) : ResponseEntity<Any> =
-            customizedErrorHandler(status, headers, ex)
+//    override fun handleHttpMediaTypeNotSupported(
+//            ex : HttpMediaTypeNotSupportedException , headers : HttpHeaders , status : HttpStatus , request : WebRequest
+//    ) : ResponseEntity<Any> =
+//            customizedErrorHandler(status, headers, ex)
 
     //endregion
 
@@ -95,7 +92,7 @@ class ErrorHandlerHelper: ResponseEntityExceptionHandler() {
         ResponseEntity<Any>(
             ErrorResponseModel(ErrorModel(httpStatus.value(),
                 httpStatus.toString(),
-                errorException.localizedMessage )) ,
+                errorException.localizedMessage.toString() )) ,
             httpHeaders,
             httpStatus)
 }
