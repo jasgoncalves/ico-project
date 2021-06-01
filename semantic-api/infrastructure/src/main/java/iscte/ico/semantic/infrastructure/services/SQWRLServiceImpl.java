@@ -8,6 +8,7 @@ import iscte.ico.semantic.application.model.QueryResult;
 import iscte.ico.semantic.domain.entities.*;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
+import org.springframework.util.ResourceUtils;
 import org.swrlapi.sqwrl.SQWRLQueryEngine;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
@@ -16,12 +17,14 @@ import org.swrlapi.parser.SWRLParseException;
 import org.swrlapi.sqwrl.SQWRLResult;
 import org.swrlapi.sqwrl.exceptions.SQWRLException;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.*;
 
 public class SQWRLServiceImpl implements SQWRLService {
 
+    private static final int DEFAULT_BUFFER_SIZE = 8192;
     private OntologyService _ontologyService;
     private SQWRLQueryEngine _queryEngine;
     private Scanner _builtinSwrl;
@@ -38,10 +41,12 @@ public class SQWRLServiceImpl implements SQWRLService {
 
     public SQWRLServiceImpl run(){
         try {
+            Instant start = Instant.now();
             _logger.info("SQWRL Sevice - Starting...");
             startQueryEngine();
             startOntologyService();
-            _logger.info("SQWRL Sevice - Started...");
+            Instant finish = Instant.now();
+            _logger.info(new StringBuilder().append("SQWRL Sevice - Started... - Initialization completed in ").append(Duration.between(start, finish).toMillis()).append(" ms").toString());
 
         } catch (Exception exception){
             _logger.error(exception.getMessage());
@@ -67,21 +72,23 @@ public class SQWRLServiceImpl implements SQWRLService {
 
         try{
             _logger.info("SQWRL Sevice - Query Engine Starting...");
-            String filePath = new File("C:\\Users\\jorge\\OneDrive\\Ambiente de Trabalho\\ISCTE\\MEI_1stYear_2stSemester\\ICO\\ico-project\\semantic-api\\infrastructure\\target\\classes\\PMOEA.owl").getAbsolutePath();
 
-            Optional<String> owlFilename = Optional.of(filePath);
-            Optional<File> owlFile = Optional.of(new File(owlFilename.get()));
+//            Optional<File> owlFile = Optional.of(new File(getClass().getClassLoader().getResource("PMOEA.owl").getFile().replace("%20"," ")));
+//             Optional<File> owlFile = Optional.of(.getParentFile());
+
+            File owlFile = new File ("./ontology.owl");
+
+            copyInputStreamToFile(getClass().getClassLoader().getResource("PMOEA.owl").openStream(), owlFile);
 
             OWLOntologyManager ontologyManager = OWLManager.createOWLOntologyManager();
-            OWLOntology ontology = ontologyManager.loadOntologyFromOntologyDocument(owlFile.get());
+            OWLOntology ontology = ontologyManager.loadOntologyFromOntologyDocument(owlFile);
             _queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(ontology);
             _logger.info("SQWRL Sevice - Query Engine Started.");
 
-        } catch (OWLOntologyCreationException e) {
+        } catch (OWLOntologyCreationException | IOException e) {
             _logger.error(e.getMessage());
             _logger.info("SQWRL Query Engine NOT started.");
         }
-
     }
 
     @Override
@@ -91,7 +98,7 @@ public class SQWRLServiceImpl implements SQWRLService {
         List<SwrlRelationalOperator> listRelationalOperators = new ArrayList<>();
         try {
 
-            _builtinSwrl = new Scanner(new File("C:\\Users\\jorge\\OneDrive\\Ambiente de Trabalho\\ISCTE\\MEI_1stYear_2stSemester\\ICO\\ico-project\\semantic-api\\infrastructure\\target\\classes\\builtinswrl.csv"));
+            _builtinSwrl = new Scanner(ResourceUtils.getFile("classpath:builtinswrl.csv"));
             _builtinSwrl.useDelimiter(";");
 
             while (_builtinSwrl.hasNext()) {
@@ -119,6 +126,7 @@ public class SQWRLServiceImpl implements SQWRLService {
         String queryName = UUID.randomUUID().toString();
         List<Dictionary<String, String>> results = new ArrayList<>();
         String query = buildQuery(queryParameters);
+        Instant start = Instant.now();
         _logger.info(new StringBuilder().append("SQWRL Sevice - Starting query:").append(queryName).append(" - ").append(query).toString());
 
         try{
@@ -144,9 +152,52 @@ public class SQWRLServiceImpl implements SQWRLService {
                 }
                 results.add(dictionary);
             }
-            _logger.info(new StringBuilder().append("Returned Rows...").append(results.size()).toString());
+            Instant finish = Instant.now();
+            _logger.info(new StringBuilder().append(results.size()).append(" Rows").append(" - Execution Time: ").append(Duration.between(start, finish).toMillis()).append(" ms").toString());
             return new QueryResult(results, results.size(), query);
         } catch (SWRLParseException | SQWRLException swrlException) {
+            _logger.error(new StringBuilder().append("SQWRL Sevice - ").append(swrlException.getMessage()).toString());
+            throw new Exception(swrlException.getMessage());
+        } finally {
+            _logger.info(new StringBuilder().append("SQWRL Sevice - Query Execution Ended").toString());
+        }
+    }
+
+    @NotNull
+    @Override
+    public QueryResult query(String queryName) throws Exception {
+
+        List<Dictionary<String, String>> results = new ArrayList<>();
+        Instant start = Instant.now();
+        _logger.info(new StringBuilder().append("SQWRL Sevice - Starting query:").append(queryName).append(" - ").toString());
+
+        try{
+
+            _logger.info(new StringBuilder().append("SQWRL Sevice - Executing query ...").toString());
+            final SQWRLResult result = _queryEngine.runSQWRLQuery(queryName);
+
+            while (result.next()){
+                Dictionary<String, String> dictionary = new Hashtable<>();
+                for (int i = 0; i < result.getNumberOfColumns(); i++) {
+                    if (result.hasNamedIndividualValue(i)) {
+                        String label = getIndividualLabelById(result.getValue(result.getColumnName(i)).toString().replace("PMOEA:", ""));
+                        if (label != null) {
+                            dictionary.put(result.getColumnName(i),label);
+                        }
+                    }
+                    else if (result.hasLiteralValue(i)) {
+                        String label = result.getValue(result.getColumnName(i)).toString();
+                        if (label != null) {
+                            dictionary.put(result.getColumnName(i),label);
+                        }
+                    }
+                }
+                results.add(dictionary);
+            }
+            Instant finish = Instant.now();
+            _logger.info(new StringBuilder().append(results.size()).append(" Rows").append(" - Execution Time: ").append(Duration.between(start, finish).toMillis()).append(" ms").toString());
+            return new QueryResult(results, results.size(), queryName);
+        } catch (SQWRLException swrlException) {
             _logger.error(new StringBuilder().append("SQWRL Sevice - ").append(swrlException.getMessage()).toString());
             throw new Exception(swrlException.getMessage());
         } finally {
@@ -399,4 +450,18 @@ public class SQWRLServiceImpl implements SQWRLService {
 //
 //        return domain == null ? null : getClassesLabelByUri(domain);
 //    }
+
+    private static void copyInputStreamToFile(InputStream inputStream, File file)
+            throws IOException {
+
+        // append = false
+        try (FileOutputStream outputStream = new FileOutputStream(file, false)) {
+            int read;
+            byte[] bytes = new byte[DEFAULT_BUFFER_SIZE];
+            while ((read = inputStream.read(bytes)) != -1) {
+                outputStream.write(bytes, 0, read);
+            }
+        }
+
+    }
 }

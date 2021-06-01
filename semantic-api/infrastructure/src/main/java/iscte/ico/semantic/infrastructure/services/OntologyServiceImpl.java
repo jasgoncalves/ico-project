@@ -22,6 +22,7 @@ public class OntologyServiceImpl implements OntologyService {
     public OntologyServiceImpl(Logger logger) {
         _model = ModelFactory.createOntologyModel();
         _model.read(getClass().getClassLoader().getResource("PMOEA.owl").toString());
+//        _model.read(getClass().getClassLoader().getResource("Scheduling.owl").toString());
         _logger = logger;
     }
 

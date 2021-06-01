@@ -10,6 +10,9 @@ interface SQWRLService {
     @Throws(Exception::class)
     fun query(queryParameters : List<QueryParameters>) : QueryResult
 
+    @Throws(Exception::class)
+    fun query(queryName : String ) : QueryResult
+
     @Throws(FileNotFoundException::class)
     fun getRelationalOperator() : List<SwrlRelationalOperator>
 

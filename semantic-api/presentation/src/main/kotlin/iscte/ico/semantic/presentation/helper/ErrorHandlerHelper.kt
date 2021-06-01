@@ -1,21 +1,16 @@
 package iscte.ico.semantic.presentation.helper
 
-import iscte.ico.semantic.presentation.model.ErrorModel
 import iscte.ico.semantic.presentation.model.ErrorResponseModel
+import iscte.ico.semantic.presentation.model.Error
 import org.springframework.beans.TypeMismatchException
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.BindException
-import org.springframework.web.HttpMediaTypeNotSupportedException
-import org.springframework.web.HttpRequestMethodNotSupportedException
 import org.springframework.web.bind.MethodArgumentNotValidException
-import org.springframework.web.bind.MissingServletRequestParameterException
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.context.request.WebRequest
-import org.springframework.web.multipart.support.MissingServletRequestPartException
-import org.springframework.web.servlet.NoHandlerFoundException
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler
 
 @ControllerAdvice
@@ -90,9 +85,11 @@ class ErrorHandlerHelper: ResponseEntityExceptionHandler() {
 
     private fun customizedErrorHandler(httpStatus : HttpStatus, httpHeaders: HttpHeaders, errorException : Exception) : ResponseEntity<Any> =
         ResponseEntity<Any>(
-            ErrorResponseModel(ErrorModel(httpStatus.value(),
-                httpStatus.toString(),
-                errorException.localizedMessage.toString() )) ,
+            ErrorResponseModel(
+                Error(httpStatus.value(),
+                    httpStatus.toString(),
+                    errorException.localizedMessage.toString() )
+            ) ,
             httpHeaders,
             httpStatus)
 }

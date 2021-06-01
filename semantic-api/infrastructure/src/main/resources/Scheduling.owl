@@ -1,0 +1,1072 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling"
+     xml:base="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+     xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+     xmlns:scheduling="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#belongsToJob -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#belongsToJob">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Task"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Job"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#belongsToJobFamily -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#belongsToJobFamily">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Job"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#JobFamily"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#consistsInJob -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#consistsInJob">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Order"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Job"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#consistsInMachine -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#consistsInMachine">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#MachineCluster"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Machine"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#consistsInTask -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#consistsInTask">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Job"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Task"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasImplementationOfHeuristic -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasImplementationOfHeuristic"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasImplementationOfMetaheuristic -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasImplementationOfMetaheuristic"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasImplementationOfProblemRepresentation -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasImplementationOfProblemRepresentation"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasObjectiveFunction -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasObjectiveFunction">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingProblem"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#ObjectiveFunction"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isAppliableHeuristicFor -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isAppliableHeuristicFor"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isOptimallySolvedByHeuristic -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isOptimallySolvedByHeuristic"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isRecomendedHeuristicFor -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isRecomendedHeuristicFor"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#precedesJob -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#precedesJob">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Job"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Job"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#precedesMachine -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#precedesMachine">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Machine"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Machine"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#precedesTask -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#precedesTask">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Task"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Task"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#succeedsJob -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#succeedsJob">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Job"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Job"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#succeedsTask -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#succeedsTask">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Task"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Task"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasAllJobsDifferent -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasAllJobsDifferent">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Order"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasAllJobsIdentical -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasAllJobsIdentical">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Order"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasBatchProcessing -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasBatchProcessing">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Machine"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasBreakdownTimeInSeconds -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasBreakdownTimeInSeconds">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Machine"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasDueDateConstraints -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasDueDateConstraints">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Job"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Order"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasFIFOQueuingConstraints -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasFIFOQueuingConstraints">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingProblem"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasJMetalImplementation -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasJMetalImplementation">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingHeuristic"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingMetaheuristic"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasJobFamilies -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasJobFamilies">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Order"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasJobPrecedenceConstraints -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasJobPrecedenceConstraints">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Order"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasJobsWithSimilarTaskContraints -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasJobsWithSimilarTaskContraints">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Order"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasMachinesInSeries -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasMachinesInSeries">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingProblem"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasNoWaitConstraints -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasNoWaitConstraints">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Job"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasNumberOfJobs -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasNumberOfJobs">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Order"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasNumberOfMachines -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasNumberOfMachines">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingProblem"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasNumberOfTasks -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasNumberOfTasks">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Job"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasPreemptionSupport -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasPreemptionSupport">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Machine"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasProcessingTimeInSeconds -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasProcessingTimeInSeconds">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Task"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasRecirculation -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasRecirculation">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Job"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasReleaseDateConstraints -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasReleaseDateConstraints">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Job"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasSequenceDependentSetupTimeConstraintsInSeconds -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasSequenceDependentSetupTimeConstraintsInSeconds">
+        <rdfs:subPropertyOf rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasSetupTimeConstraintsInSeconds"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Machine"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasSetupTimeConstraintsInSeconds -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasSetupTimeConstraintsInSeconds">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Machine"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasTaskPrecedenceConstraints -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasTaskPrecedenceConstraints">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Job"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasWeightConstraints -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasWeightConstraints">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Job"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isFlexibleFlowShopProblem -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isFlexibleFlowShopProblem">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingProblem"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+        <rdfs:comment>Flexible Flow Shop Problem is a problem that ...</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isFlexibleJobShopProblem -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isFlexibleJobShopProblem">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingProblem"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isFlexibleOpenShopProblem -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isFlexibleOpenShopProblem">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingProblem"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isFlowShopProblem -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isFlowShopProblem">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingProblem"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+        <rdfs:comment>Flow Shop Problem is a problem that ...</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isJobShopProblem -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isJobShopProblem">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingProblem"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isOpenShopProblem -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isOpenShopProblem">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingProblem"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isParallelIdenticalMachinesProblem -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isParallelIdenticalMachinesProblem">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingProblem"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isParallelIdenticalMachinesWithDifferentSpeedsProblem -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isParallelIdenticalMachinesWithDifferentSpeedsProblem">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingProblem"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isParallelMachinesProblem -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isParallelMachinesProblem">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingProblem"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isParallelUnrelatedMachinesProblem -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isParallelUnrelatedMachinesProblem">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingProblem"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isSingleMachineProblem -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isSingleMachineProblem">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingProblem"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#CharacteristicAndConstraint -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#CharacteristicAndConstraint">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingProblem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#FlexibleFlowShop -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#FlexibleFlowShop">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isFlexibleFlowShopProblem"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:hasValue>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#FlowShop"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#FlexibleJobShop -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#FlexibleJobShop">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isFlexibleJobShopProblem"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:hasValue>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#JobShop"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#FlowShop -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#FlowShop">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isFlowShopProblem"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:hasValue>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#MachineEnvironment"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasNumberOfMachines"/>
+                <owl:someValuesFrom>
+                    <rdfs:Datatype>
+                        <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+                        <owl:withRestrictions rdf:parseType="Collection">
+                            <rdf:Description>
+                                <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2</xsd:minInclusive>
+                            </rdf:Description>
+                        </owl:withRestrictions>
+                    </rdfs:Datatype>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasJobsWithSimilarTaskContraints"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasMachinesInSeries"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasTaskPrecedenceConstraints"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Job -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Job"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#JobFamily -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#JobFamily"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#JobShop -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#JobShop">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isJobShopProblem"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:hasValue>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#MachineEnvironment"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasNumberOfMachines"/>
+                <owl:someValuesFrom>
+                    <rdfs:Datatype>
+                        <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+                        <owl:withRestrictions rdf:parseType="Collection">
+                            <rdf:Description>
+                                <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2</xsd:minInclusive>
+                            </rdf:Description>
+                        </owl:withRestrictions>
+                    </rdfs:Datatype>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasMachinesInSeries"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasTaskPrecedenceConstraints"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Machine -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Machine"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#MachineCluster -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#MachineCluster"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#MachineEnvironment -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#MachineEnvironment">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingProblem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#ObjectiveFunction -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#ObjectiveFunction">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingProblem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#OpenShop -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#OpenShop">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isOpenShopProblem"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:hasValue>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#MachineEnvironment"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasNumberOfMachines"/>
+                <owl:someValuesFrom>
+                    <rdfs:Datatype>
+                        <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+                        <owl:withRestrictions rdf:parseType="Collection">
+                            <rdf:Description>
+                                <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2</xsd:minInclusive>
+                            </rdf:Description>
+                        </owl:withRestrictions>
+                    </rdfs:Datatype>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#OptimizationFramework -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#OptimizationFramework"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Order -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Order"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#ParallelIdenticalMachines -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#ParallelIdenticalMachines">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#ParallelMachines"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#ParallelIdenticalMachinesWithDifferentSpeeds -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#ParallelIdenticalMachinesWithDifferentSpeeds">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#ParallelIdenticalMachines"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#ParallelMachines -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#ParallelMachines">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#MachineEnvironment"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasNumberOfMachines"/>
+                <owl:someValuesFrom>
+                    <rdfs:Datatype>
+                        <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+                        <owl:withRestrictions rdf:parseType="Collection">
+                            <rdf:Description>
+                                <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2</xsd:minInclusive>
+                            </rdf:Description>
+                        </owl:withRestrictions>
+                    </rdfs:Datatype>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#ParallelUnrelatedMachines -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#ParallelUnrelatedMachines">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#ParallelMachines"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingHeuristic -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingHeuristic"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingMetaheuristic -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingMetaheuristic"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingProblem -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingProblem"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingProblemRepresentation -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingProblemRepresentation">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingProblem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SingleMachine -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SingleMachine">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasNumberOfMachines"/>
+                        <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</owl:hasValue>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isSingleMachineProblem"/>
+                        <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:hasValue>
+                    </owl:Restriction>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#MachineEnvironment"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Task -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#Task"/>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#WeightedObjectiveFunction -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#WeightedObjectiveFunction">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#ObjectiveFunction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasWeightConstraints"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#WeightedSchedulingHeuristic -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#WeightedSchedulingHeuristic">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingHeuristic"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasWeightConstraints"/>
+                <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:hasValue>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#discountedTotalWeightedCompletionTime -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#discountedTotalWeightedCompletionTime">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#ObjectiveFunction"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#jMetal -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#jMetal">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#OptimizationFramework"/>
+        <scheduling:hasImplementationOfProblemRepresentation rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#permutationVector"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#makespan -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#makespan">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#ObjectiveFunction"/>
+        <scheduling:hasJMetalImplementation>Makespan</scheduling:hasJMetalImplementation>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#maximumLateness -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#maximumLateness">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#ObjectiveFunction"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#myspecificobjectivefunction -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#myspecificobjectivefunction">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#ObjectiveFunction"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#myspecificproblem -->
+
+    <owl:Thing rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#myspecificproblem">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <scheduling:hasObjectiveFunction rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#totalWeightedCompletionTime"/>
+        <scheduling:hasNumberOfMachines rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</scheduling:hasNumberOfMachines>
+        <rdfs:comment>Maximum job completion time (completion time of the last job processed).</rdfs:comment>
+        <rdfs:isDefinedBy>MAX(job,completiontime)</rdfs:isDefinedBy>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#permutationJobsAndMachinesMatrix -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#permutationJobsAndMachinesMatrix">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingProblemRepresentation"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#permutationVector -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#permutationVector">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingProblemRepresentation"/>
+        <scheduling:hasJMetalImplementation>IntegerPermutationSolution</scheduling:hasJMetalImplementation>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#shortestProcessingTimeFirst -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#shortestProcessingTimeFirst">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SchedulingHeuristic"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#totalWeightedCompletionTime -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#totalWeightedCompletionTime">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#ObjectiveFunction"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#totalWeightedTardiness -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#totalWeightedTardiness">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#ObjectiveFunction"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#weightedNumberOfTardyJobs -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#weightedNumberOfTardyJobs">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#ObjectiveFunction"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#weightedShortestProcessingTimeFirst -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#weightedShortestProcessingTimeFirst">
+        <rdf:type rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#WeightedSchedulingHeuristic"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Rules
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description rdf:about="urn:swrl:var#problem">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="urn:swrl:var#objectivefunction">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="urn:swrl:var#heuristic">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
+        <swrl:body>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                        <swrl:classPredicate rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#SingleMachine"/>
+                        <swrl:argument1 rdf:resource="urn:swrl:var#problem"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                        <rdf:first>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasObjectiveFunction"/>
+                                <swrl:argument1 rdf:resource="urn:swrl:var#problem"/>
+                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#totalWeightedCompletionTime"/>
+                            </rdf:Description>
+                        </rdf:first>
+                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                    </rdf:Description>
+                </rdf:rest>
+            </rdf:Description>
+        </swrl:body>
+        <swrl:head>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isOptimallySolvedByHeuristic"/>
+                        <swrl:argument1 rdf:resource="urn:swrl:var#problem"/>
+                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#weightedShortestProcessingTimeFirst"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+            </rdf:Description>
+        </swrl:head>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
+        <swrl:body>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasObjectiveFunction"/>
+                        <swrl:argument1 rdf:resource="urn:swrl:var#problem"/>
+                        <swrl:argument2 rdf:resource="urn:swrl:var#objectivefunction"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                        <rdf:first>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasWeightConstraints"/>
+                                <swrl:argument1 rdf:resource="urn:swrl:var#objectivefunction"/>
+                                <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrl:argument2>
+                            </rdf:Description>
+                        </rdf:first>
+                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                    </rdf:Description>
+                </rdf:rest>
+            </rdf:Description>
+        </swrl:body>
+        <swrl:head>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#isOptimallySolvedByHeuristic"/>
+                        <swrl:argument1 rdf:resource="urn:swrl:var#problem"/>
+                        <swrl:argument2 rdf:resource="urn:swrl:var#heuristic"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                        <rdf:first>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/vbasto/ontologies/2021/4/scheduling#hasWeightConstraints"/>
+                                <swrl:argument1 rdf:resource="urn:swrl:var#heuristic"/>
+                                <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrl:argument2>
+                            </rdf:Description>
+                        </rdf:first>
+                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                    </rdf:Description>
+                </rdf:rest>
+            </rdf:Description>
+        </swrl:head>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+

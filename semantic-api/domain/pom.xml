@@ -5,10 +5,16 @@
 
     <groupId>iscte.ico.semantic</groupId>
     <artifactId>domain</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>iscte.ico.semantic domain</name>
+    <name>domain</name>
+
+    <parent>
+        <groupId>iscte.ico.semantic</groupId>
+        <artifactId>semanantic-api</artifactId>
+        <version>0.1.0</version>
+    </parent>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
