@@ -801,7 +801,6 @@
         <rdfs:comment>preference_based multi-objective evolutionary algorithms</rdfs:comment>
         <rdfs:label xml:lang="en">PMOEA</rdfs:label>
     </owl:Class>
-    
 
 
     <!-- http://www.semanticweb.org/longmeili/ontologies/PMOEA#OWLClass_64cce782_d75b_4552_8420_db5dea08fa41 -->

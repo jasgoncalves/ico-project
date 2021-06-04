@@ -6,6 +6,7 @@ import java.io.Serializable
 class OwlObjectProperty(
         val id: String ,
         val label: String,
+        val domainLabel: String?,
         val uri: String,
-        val description: String
+        val description: String?
 ) : Entity , Serializable

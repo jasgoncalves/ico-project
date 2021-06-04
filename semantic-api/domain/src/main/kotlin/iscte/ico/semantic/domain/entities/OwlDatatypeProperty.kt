@@ -7,6 +7,7 @@ data class OwlDatatypeProperty(
         val id: String ,
         val label: String,
         val dataType: String?,
+        val domainLabel: String?,
         val uri: String,
-        val description: String
+        val description: String?
         ) : Entity , Serializable

@@ -73,9 +73,6 @@ public class SQWRLServiceImpl implements SQWRLService {
         try{
             _logger.info("SQWRL Sevice - Query Engine Starting...");
 
-//            Optional<File> owlFile = Optional.of(new File(getClass().getClassLoader().getResource("PMOEA.owl").getFile().replace("%20"," ")));
-//             Optional<File> owlFile = Optional.of(.getParentFile());
-
             File owlFile = new File ("./ontology.owl");
 
             copyInputStreamToFile(getClass().getClassLoader().getResource("PMOEA.owl").openStream(), owlFile);
@@ -92,13 +89,16 @@ public class SQWRLServiceImpl implements SQWRLService {
     }
 
     @Override
-    public List<SwrlRelationalOperator> getRelationalOperator() throws FileNotFoundException {
+    public List<SwrlRelationalOperator> getRelationalOperator() throws IOException {
 
         _logger.info("SQWRL Sevice - Getting relation operators list");
         List<SwrlRelationalOperator> listRelationalOperators = new ArrayList<>();
         try {
 
-            _builtinSwrl = new Scanner(ResourceUtils.getFile("classpath:builtinswrl.csv"));
+            File csvFile = new File ("./builtinswrl.csv");
+            copyInputStreamToFile(getClass().getClassLoader().getResource("builtinswrl.csv").openStream(), csvFile);
+
+            _builtinSwrl = new Scanner(csvFile);
             _builtinSwrl.useDelimiter(";");
 
             while (_builtinSwrl.hasNext()) {

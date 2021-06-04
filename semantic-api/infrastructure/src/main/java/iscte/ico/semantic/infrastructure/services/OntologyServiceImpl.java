@@ -85,18 +85,19 @@ public class OntologyServiceImpl implements OntologyService {
             DatatypeProperty datatypeProperty = (DatatypeProperty) datatypeProperties.next();
             String id = datatypeProperty.getLocalName();
             String uri = datatypeProperty.getURI();
-            String dataType = datatypeProperty.getPropertyValue(RDFS.range) == null
+            String domainLabel = datatypeProperty.getDomain() == null
                     ? null
-                    : datatypeProperty.getPropertyValue(RDFS.range).toString().replace("http://www.w3.org/2001/XMLSchema#", "");
-            String label = datatypeProperty.getPropertyValue(RDFS.label) == null
+                    : datatypeProperty.getDomain().getLabel("EN");
+            String dataType = datatypeProperty.getRange() == null
+                    ? null
+                    : datatypeProperty.getRange().getLocalName();
+            String label = datatypeProperty.getLabel("EN") == null
                     ? datatypeProperty.getLocalName()
-                    : datatypeProperty.getPropertyValue(RDFS.label).toString().replace("@en", "");
-            String description = datatypeProperty.getPropertyValue(RDFS.comment) == null
-                    ? ""
-                    : datatypeProperty.getPropertyValue(RDFS.comment).toString();
+                    : datatypeProperty.getLabel("EN");
+            String description = datatypeProperty.getComment("EN");
 
             if(id != null)
-                listDatatypeProperties.add(new OwlDatatypeProperty( id, label, dataType, uri, description));
+                listDatatypeProperties.add(new OwlDatatypeProperty( id, label, dataType, domainLabel, uri, description));
         }
         return listDatatypeProperties;
     }
@@ -112,15 +113,16 @@ public class OntologyServiceImpl implements OntologyService {
             ObjectProperty objectProperty = (ObjectProperty) objectProperties.next();
             String id = objectProperty.getLocalName();
             String uri = objectProperty.getURI();
-            String label = objectProperty.getPropertyValue(RDFS.label) == null
+            String label = objectProperty.getLabel("EN") == null
                     ? objectProperty.getLocalName()
-                    : objectProperty.getPropertyValue(RDFS.label).toString().replace("@en", "");
-            String description = objectProperty.getPropertyValue(RDFS.comment) == null
-                    ? ""
-                    : objectProperty.getPropertyValue(RDFS.comment).toString();
+                    : objectProperty.getLabel("EN");
+            String description = objectProperty.getComment("EN");
+            String domainLabel = objectProperty.getDomain() == null
+                    ? null
+                    : objectProperty.getDomain().getLabel("EN");
 
             if(id != null)
-                listObjectProperties.add(new OwlObjectProperty( id, label, uri, description));
+                listObjectProperties.add(new OwlObjectProperty( id, label, domainLabel, uri, description));
         }
         return listObjectProperties;
     }

@@ -19,6 +19,7 @@ class SQRWLController {
     private lateinit var _owlService: OwlService
 
     @PostMapping
+    @CrossOrigin(origins = ["*"])
     fun post(@RequestBody request : QueryRequestModel) : ResponseModel {
         var listQueryParamaters = mutableListOf<QueryParameters>()
         request.queryParameters.forEach{
@@ -31,6 +32,7 @@ class SQRWLController {
     }
 
     @GetMapping
+    @CrossOrigin(origins = ["*"])
     fun get(@RequestParam("queryName") queryName : String) : ResponseModel {
         return ResponseModel(
             _owlService.executeQuery(queryName),

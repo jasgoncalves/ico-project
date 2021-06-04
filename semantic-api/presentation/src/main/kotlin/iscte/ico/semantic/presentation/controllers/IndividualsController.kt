@@ -17,6 +17,7 @@ class IndividualsController {
     private lateinit var _owlService: OwlService
 
     @GetMapping
+    @CrossOrigin(origins = ["*"])
     fun get() : ResponseModel {
 
         return ResponseModel(
