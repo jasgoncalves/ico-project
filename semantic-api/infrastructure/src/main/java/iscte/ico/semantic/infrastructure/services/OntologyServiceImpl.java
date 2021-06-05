@@ -10,20 +10,24 @@ import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.util.iterator.ExtendedIterator;
 import org.apache.jena.vocabulary.RDFS;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class OntologyServiceImpl implements OntologyService {
 
     private OntModel _model;
     private Logger _logger;
 
+    @Autowired
     public OntologyServiceImpl(Logger logger) {
+        _logger = logger;
         _model = ModelFactory.createOntologyModel();
         _model.read(getClass().getClassLoader().getResource("PMOEA.owl").toString());
 //        _model.read(getClass().getClassLoader().getResource("Scheduling.owl").toString());
-        _logger = logger;
     }
 
     @Override

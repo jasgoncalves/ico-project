@@ -8,7 +8,10 @@ import iscte.ico.semantic.application.model.QueryResult;
 import iscte.ico.semantic.domain.entities.*;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
-import org.springframework.util.ResourceUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.swrlapi.sqwrl.SQWRLQueryEngine;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
@@ -22,24 +25,27 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
 
+@Service
 public class SQWRLServiceImpl implements SQWRLService {
 
     private static final int DEFAULT_BUFFER_SIZE = 8192;
     private OntologyService _ontologyService;
+    private Logger _logger;
     private SQWRLQueryEngine _queryEngine;
     private Scanner _builtinSwrl;
     private List<OwlClass> _classes;
     private List<OwlIndividual> _individuals;
     private List<OwlDatatypeProperty> _datatypePropeties;
     private List<OwlObjectProperty> _objectProperties;
-    private Logger _logger;
 
-    public SQWRLServiceImpl(Logger logger, OntologyService ontologyService){
+    @Autowired
+    public SQWRLServiceImpl(OntologyService ontologyService, Logger logger){
         _logger = logger;
         _ontologyService = ontologyService;
+        run();
     }
 
-    public SQWRLServiceImpl run(){
+    public void run(){
         try {
             Instant start = Instant.now();
             _logger.info("SQWRL Sevice - Starting...");
@@ -53,7 +59,6 @@ public class SQWRLServiceImpl implements SQWRLService {
             _logger.info("SQWRL Service NOT started.");
             throw exception;
         }
-        return this;
     }
 
     private void startOntologyService(){
@@ -155,7 +160,11 @@ public class SQWRLServiceImpl implements SQWRLService {
             Instant finish = Instant.now();
             _logger.info(new StringBuilder().append(results.size()).append(" Rows").append(" - Execution Time: ").append(Duration.between(start, finish).toMillis()).append(" ms").toString());
             return new QueryResult(results, results.size(), query);
-        } catch (SWRLParseException | SQWRLException swrlException) {
+        } catch (SWRLParseException | SQWRLException  swrlException ) {
+            _logger.error(new StringBuilder().append("SQWRL Sevice - ").append(swrlException.getMessage()).toString());
+            throw new Exception(swrlException.getMessage());
+        }
+        catch (Exception swrlException ) {
             _logger.error(new StringBuilder().append("SQWRL Sevice - ").append(swrlException.getMessage()).toString());
             throw new Exception(swrlException.getMessage());
         } finally {
