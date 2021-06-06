@@ -16,4 +16,6 @@ interface SQWRLService {
     @Throws(IOException::class)
     fun getRelationalOperator() : List<SwrlRelationalOperator>
 
+    fun run()
+
 }

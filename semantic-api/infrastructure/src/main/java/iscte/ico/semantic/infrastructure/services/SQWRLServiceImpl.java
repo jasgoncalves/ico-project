@@ -319,9 +319,10 @@ public class SQWRLServiceImpl implements SQWRLService {
                 queryParameters
                     .stream()
                     .filter(x->
-                        x.getEntityType().equals(QueryEntityType.Class)
+                            (x.getEntityType().equals(QueryEntityType.Class)
                         || x.getEntityType().equals(QueryEntityType.ObjectProperty)
-                        || x.getEntityType().equals(QueryEntityType.DatatypeProperty)
+                        || x.getEntityType().equals(QueryEntityType.DatatypeProperty))
+                            && x.isColumnShowed()
                     )
                     .iterator();
 

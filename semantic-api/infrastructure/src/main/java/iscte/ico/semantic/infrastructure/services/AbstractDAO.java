@@ -1,4 +1,4 @@
-package iscte.ico.semantic.infrastructure.persistence;
+package iscte.ico.semantic.infrastructure.services;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
+@SuppressWarnings("unchecked")
 public abstract class AbstractDAO< T extends Serializable>{
     private Class< T > clazz;
 

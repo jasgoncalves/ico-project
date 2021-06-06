@@ -1,7 +1,4 @@
-package iscte.ico.semantic.infrastructure.model;
-
-import org.hibernate.annotations.GenericGenerator;
-
+package iscte.ico.semantic.infrastructure.services;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,17 +9,12 @@ import java.util.UUID;
 public class Query implements Serializable {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator"
-    )
     @Column(name = "id", updatable = false, nullable = false)
-    private UUID id;
+    private UUID id = UUID.randomUUID();
     @Column(nullable = false)
     private String name;
     @Lob
-    private Object queryParameters;
+    private String queryParameters;
 
     public UUID getId() {
         return id;
@@ -40,11 +32,11 @@ public class Query implements Serializable {
         this.name = name;
     }
 
-    public Object getQueryParameters() {
+    public String getQueryParameters() {
         return queryParameters;
     }
 
-    public void setQueryParameters(Object queryParameters) {
+    public void setQueryParameters(String queryParameters) {
         this.queryParameters = queryParameters;
     }
 }

@@ -1,14 +1,12 @@
-package iscte.ico.semantic.infrastructure;
+package iscte.ico.semantic.infrastructure.services;
 
-import iscte.ico.semantic.application.interfaces.SQWRLService;
-import iscte.ico.semantic.infrastructure.persistence.QueryDAOImpl;
-import iscte.ico.semantic.infrastructure.persistence.interfaces.QueryDAO;
-import iscte.ico.semantic.infrastructure.services.SQWRLServiceImpl;
+import iscte.ico.semantic.application.interfaces.OwlService;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -25,8 +23,7 @@ public class Bootstraper {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan(
-                new String[]{"iscte.ico.semantic.infrastructure.persistence","iscte.ico.semantic.infrastructure.model"});
+        sessionFactory.setPackagesToScan("iscte.ico.semantic.infrastructure.services");
         sessionFactory.setHibernateProperties(hibernateProperties());
 
         return sessionFactory;
@@ -36,7 +33,8 @@ public class Bootstraper {
     public DataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUrl("jdbc:h2:mem:db;DB_CLOSE_DELAY=-1");
+//        dataSource.setUrl("jdbc:h2:tcp://localhost/~/semantic;DB_CLOSE_DELAY=-1;INIT=CREATE SCHEMA IF NOT EXISTS SEMANTICA");
+        dataSource.setUrl("jdbc:h2:mem:semantic;DB_CLOSE_DELAY=-1;INIT=CREATE SCHEMA IF NOT EXISTS SEMANTICA");
         dataSource.setUsername("sa");
         dataSource.setPassword("sa");
 
@@ -52,16 +50,27 @@ public class Bootstraper {
     }
 
     @Bean
-    public Logger logger() { return LoggerFactory.getLogger(Bootstraper.class);}
+    public Logger logger() { return LoggerFactory.getLogger("Semantic API - Services");}
+
+    @Bean
+    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+        return new PersistenceExceptionTranslationPostProcessor();
+    }
 
     private final Properties hibernateProperties() {
         Properties hibernateProperties = new Properties();
         hibernateProperties.setProperty(
-                "hibernate.hbm2ddl.auto", "update");
+                "hibernate.hbm2ddl.auto", "create");
         hibernateProperties.setProperty(
                 "hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+        hibernateProperties.setProperty(
+                "hibernate.show_sql", "true");
 
         return hibernateProperties;
     }
 
+//    @Bean
+//    public OwlService owlService() {
+//        return new OwlServiceImpl();
+//    }
 }

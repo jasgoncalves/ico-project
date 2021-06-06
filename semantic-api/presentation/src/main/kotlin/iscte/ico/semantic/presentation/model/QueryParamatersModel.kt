@@ -8,4 +8,5 @@ data class QueryParamatersModel(
         @JsonProperty("entity") val entity: String ,
         @JsonProperty("name") val name: String ,
         @JsonProperty("is_ordered_by")  val isOrderedBy: Boolean,
+        @JsonProperty("is_column_showed")  val isColumnShowed: Boolean,
         @JsonProperty("args") val args: List<String>)

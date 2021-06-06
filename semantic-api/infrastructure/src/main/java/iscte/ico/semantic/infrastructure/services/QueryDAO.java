@@ -1,6 +1,6 @@
-package iscte.ico.semantic.infrastructure.persistence.interfaces;
+package iscte.ico.semantic.infrastructure.services;
 
-import iscte.ico.semantic.infrastructure.model.Query;
+import iscte.ico.semantic.infrastructure.services.Query;
 
 import java.util.List;
 import java.util.UUID;

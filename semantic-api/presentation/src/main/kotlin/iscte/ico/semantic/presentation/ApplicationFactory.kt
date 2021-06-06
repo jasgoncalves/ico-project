@@ -1,11 +1,17 @@
 package iscte.ico.semantic.presentation
 
-import iscte.ico.semantic.application.interfaces.DatabaseService
-import iscte.ico.semantic.application.interfaces.OntologyService
-import iscte.ico.semantic.application.interfaces.OwlService
-import iscte.ico.semantic.application.interfaces.SQWRLService
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
+//import iscte.ico.semantic.application.interfaces.DatabaseService
+//import iscte.ico.semantic.application.interfaces.OntologyService
+//import iscte.ico.semantic.application.interfaces.OwlService
+//import iscte.ico.semantic.application.interfaces.SQWRLService
+//import iscte.ico.semantic.infrastructure.services.QueryDAOImpl
+//import iscte.ico.semantic.infrastructure.services.QueryDAO
+//import iscte.ico.semantic.infrastructure.services.DatabaseServiceImpl
+//import iscte.ico.semantic.infrastructure.services.OntologyServiceImpl
+//import iscte.ico.semantic.infrastructure.services.OwlServiceImpl
+//import iscte.ico.semantic.infrastructure.services.SQWRLServiceImpl
+//import org.slf4j.Logger
+//import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
@@ -13,16 +19,21 @@ import org.springframework.context.annotation.Configuration
 class ApplicationFactory {
 
 //    @Bean
-//    fun ontologyService() : OntologyService =
-//            OntologyServiceImpl(logger())
+//    fun owlService() : OwlService {
+//        return OwlServiceImpl()
+//    }
 //
 //    @Bean
 //    fun sqwrlService() : SQWRLService =
-//            SQWRLServiceImpl(logger(), ontologyService()).run()
+//            SQWRLServiceImpl(ontologyService(), logger())
 //
 //    @Bean
 //    fun databaseService() : DatabaseService =
-//        DatabaseServiceImpl(logger())
+//        DatabaseServiceImpl(queryDAO(), logger())
+//
+//    @Bean
+//    fun queryDAO() : QueryDAO=
+//        QueryDAOImpl()
 //
 //    @Bean
 //    fun logger() : Logger =

@@ -4,6 +4,7 @@ import iscte.ico.semantic.application.interfaces.DatabaseService
 import iscte.ico.semantic.application.interfaces.OwlService
 import iscte.ico.semantic.application.model.QueryParameters
 import iscte.ico.semantic.presentation.model.Error
+import iscte.ico.semantic.presentation.model.ErrorResponseModel
 import iscte.ico.semantic.presentation.model.QueryRequestModel
 import iscte.ico.semantic.presentation.model.ResponseModel
 import org.springframework.beans.factory.annotation.Autowired
@@ -26,12 +27,12 @@ class SQRWLController {
     @PostMapping("/run")
     @CrossOrigin(origins = ["*"])
     fun run(@RequestBody request : QueryRequestModel) : ResponseModel {
-        var listQueryParamaters = mutableListOf<QueryParameters>()
+        val listQueryParameters = mutableListOf<QueryParameters>()
         request.queryParameters.forEach{
-            listQueryParamaters.add(QueryParameters(it.entityType, it.entity, it.name, it.isOrderedBy, it.args))
+            listQueryParameters.add(QueryParameters(it.entityType, it.entity, it.name, it.isOrderedBy, it.isColumnShowed, it.args))
         }
         return ResponseModel(
-            _owlService.executeQuery(listQueryParamaters),
+            _owlService.executeQuery(listQueryParameters),
             Error(HttpStatus.OK.value(), HttpStatus.OK.toString(), "Success")
         )
     }
@@ -39,15 +40,15 @@ class SQRWLController {
     @PostMapping
     @CrossOrigin(origins = ["*"])
     fun post(@RequestBody request : QueryRequestModel) : ResponseModel {
-        var name = request.name
-        var listQueryParamaters = mutableListOf<QueryParameters>()
+        val name = request.name
+        val listQueryParameters = mutableListOf<QueryParameters>()
         request.queryParameters.forEach{
-            listQueryParamaters.add(QueryParameters(it.entityType, it.entity, it.name, it.isOrderedBy, it.args))
+            listQueryParameters.add(QueryParameters(it.entityType, it.entity, it.name, it.isOrderedBy, it.isColumnShowed, it.args))
         }
-        _databaseService.createQuery(name, listQueryParamaters);
+        _databaseService.createQuery(name, listQueryParameters)
         return ResponseModel(
-            _owlService.executeQuery(listQueryParamaters),
-            Error(HttpStatus.OK.value(), HttpStatus.OK.toString(), "Success")
+            _owlService.executeQuery(listQueryParameters),
+            Error(HttpStatus.CREATED.value(), HttpStatus.CREATED.toString(), "Success")
         )
     }
 
@@ -57,6 +58,30 @@ class SQRWLController {
         return ResponseModel(
             _databaseService.getQuery(queryID),
             Error(HttpStatus.OK.value(), HttpStatus.OK.toString(), "Success")
+        )
+    }
+
+    @PutMapping("/{id}")
+    @CrossOrigin(origins = ["*"])
+    fun updateByID(@PathVariable("id") queryID : UUID, @RequestBody request : QueryRequestModel) : ResponseModel {
+        val name = request.name
+        val listQueryParameters = mutableListOf<QueryParameters>()
+        request.queryParameters.forEach{
+            listQueryParameters.add(QueryParameters(it.entityType, it.entity, it.name, it.isOrderedBy, it.isColumnShowed, it.args))
+        }
+        _databaseService.updateQuery(queryID, name, listQueryParameters)
+        return ResponseModel(
+            _owlService.executeQuery(listQueryParameters),
+            Error(HttpStatus.OK.value(), HttpStatus.OK.toString(), "Success")
+        )
+    }
+
+    @DeleteMapping("/{id}")
+    @CrossOrigin(origins = ["*"])
+    fun deleteByID(@PathVariable("id") queryID : UUID) : ErrorResponseModel {
+        _databaseService.deleteQuery(queryID)
+        return ErrorResponseModel(
+            Error(HttpStatus.NO_CONTENT.value(), HttpStatus.NO_CONTENT.toString(), "Success")
         )
     }
 
