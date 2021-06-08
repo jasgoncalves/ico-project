@@ -45,9 +45,8 @@ class SQRWLController {
         request.queryParameters.forEach{
             listQueryParameters.add(QueryParameters(it.entityType, it.entity, it.name, it.isOrderedBy, it.isColumnShowed, it.args))
         }
-        _databaseService.createQuery(name, listQueryParameters)
         return ResponseModel(
-            _owlService.executeQuery(listQueryParameters),
+            _databaseService.createQuery(name, listQueryParameters),
             Error(HttpStatus.CREATED.value(), HttpStatus.CREATED.toString(), "Success")
         )
     }

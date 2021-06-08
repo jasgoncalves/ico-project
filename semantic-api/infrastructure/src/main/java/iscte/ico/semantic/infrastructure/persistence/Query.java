@@ -1,4 +1,4 @@
-package iscte.ico.semantic.infrastructure.services;
+package iscte.ico.semantic.infrastructure.persistence;
 
 import javax.persistence.*;
 import java.io.Serializable;

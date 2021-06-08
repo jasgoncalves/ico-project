@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import iscte.ico.semantic.application.interfaces.DatabaseService;
 import iscte.ico.semantic.application.model.Query;
 import iscte.ico.semantic.application.model.QueryParameters;
+import iscte.ico.semantic.infrastructure.persistence.QueryDAO;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class DatabaseServiceImpl implements DatabaseService {
         try {
             Instant start = Instant.now();
             _logger.info("Database Service - Executing query ...");
-            iscte.ico.semantic.infrastructure.services.Query query = _queryDAO.getByID(queryID);
+            iscte.ico.semantic.infrastructure.persistence.Query query = _queryDAO.getByID(queryID);
             result = new Query(query.getId(), query.getName(), new ObjectMapper().readValue(query.getQueryParameters(), QueryParameters[].class));
             Instant finish = Instant.now();
             _logger.info(new StringBuilder().append("Execution Time: ").append(Duration.between(start, finish).toMillis()).append(" ms").toString());
@@ -72,24 +73,26 @@ public class DatabaseServiceImpl implements DatabaseService {
     }
 
     @Override
-    public void createQuery(@NotNull String name, @NotNull List<QueryParameters> queryParameters) throws JsonProcessingException {
+    public UUID createQuery(@NotNull String name, @NotNull List<QueryParameters> queryParameters) throws JsonProcessingException {
+        UUID id = null;
         try {
             _logger.info("Database Service - Executing query ...");
-            iscte.ico.semantic.infrastructure.services.Query query = new iscte.ico.semantic.infrastructure.services.Query();
+            iscte.ico.semantic.infrastructure.persistence.Query query = new iscte.ico.semantic.infrastructure.persistence.Query();
             query.setName(name);
             query.setQueryParameters(new ObjectMapper().writeValueAsString(queryParameters));
-            _queryDAO.create(query);
+            id = _queryDAO.create(query);
             _logger.info("Database Service - Saved ...");
         } catch (Exception e) {
             _logger.error(e.getMessage());
         }
+        return id;
     }
 
     @Override
     public void updateQuery(@NotNull UUID id, @NotNull String name, @NotNull List<QueryParameters> queryParameters) throws JsonProcessingException {
         try {
             _logger.info("Database Service - Executing query ...");
-            iscte.ico.semantic.infrastructure.services.Query query = new iscte.ico.semantic.infrastructure.services.Query();
+            iscte.ico.semantic.infrastructure.persistence.Query query = new iscte.ico.semantic.infrastructure.persistence.Query();
             query.setId(id);
             query.setName(name);
             query.setQueryParameters(new ObjectMapper().writeValueAsString(queryParameters));

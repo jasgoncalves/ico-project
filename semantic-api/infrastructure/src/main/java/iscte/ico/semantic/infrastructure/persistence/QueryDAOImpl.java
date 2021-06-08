@@ -1,8 +1,5 @@
-package iscte.ico.semantic.infrastructure.services;
+package iscte.ico.semantic.infrastructure.persistence;
 
-import iscte.ico.semantic.infrastructure.services.AbstractDAO;
-import iscte.ico.semantic.infrastructure.services.Query;
-import iscte.ico.semantic.infrastructure.services.QueryDAO;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
@@ -30,10 +27,12 @@ public class QueryDAOImpl extends AbstractDAO<Query> implements QueryDAO {
     }
 
     @Override
-    public void create(Query query) {
+    public UUID create(Query query) {
         _transaction = getCurrentSession().beginTransaction();
         save(query);
+        getCurrentSession().flush();
         _transaction.commit();
+        return query.getId();
     }
 
     @Override

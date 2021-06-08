@@ -1,4 +1,4 @@
-package iscte.ico.semantic.infrastructure.services;
+package iscte.ico.semantic.infrastructure;
 
 import iscte.ico.semantic.application.interfaces.OwlService;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
@@ -23,7 +23,7 @@ public class Bootstraper {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("iscte.ico.semantic.infrastructure.services");
+        sessionFactory.setPackagesToScan("iscte.ico.semantic.infrastructure.persistence");
         sessionFactory.setHibernateProperties(hibernateProperties());
 
         return sessionFactory;
@@ -33,8 +33,8 @@ public class Bootstraper {
     public DataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("org.h2.Driver");
-//        dataSource.setUrl("jdbc:h2:tcp://localhost/~/semantic;DB_CLOSE_DELAY=-1;INIT=CREATE SCHEMA IF NOT EXISTS SEMANTICA");
-        dataSource.setUrl("jdbc:h2:mem:semantic;DB_CLOSE_DELAY=-1;INIT=CREATE SCHEMA IF NOT EXISTS SEMANTICA");
+        dataSource.setUrl("jdbc:h2:tcp://localhost/~/semantic;DB_CLOSE_DELAY=-1;INIT=CREATE SCHEMA IF NOT EXISTS SEMANTICA");
+//        dataSource.setUrl("jdbc:h2:mem:semantic;DB_CLOSE_DELAY=-1;INIT=CREATE SCHEMA IF NOT EXISTS SEMANTICA");
         dataSource.setUsername("sa");
         dataSource.setPassword("sa");
 
@@ -60,7 +60,7 @@ public class Bootstraper {
     private final Properties hibernateProperties() {
         Properties hibernateProperties = new Properties();
         hibernateProperties.setProperty(
-                "hibernate.hbm2ddl.auto", "create");
+                "hibernate.hbm2ddl.auto", "update");
         hibernateProperties.setProperty(
                 "hibernate.dialect", "org.hibernate.dialect.H2Dialect");
         hibernateProperties.setProperty(

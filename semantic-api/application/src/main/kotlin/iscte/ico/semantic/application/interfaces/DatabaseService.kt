@@ -10,7 +10,7 @@ interface DatabaseService {
     fun getQuery(queryID: UUID) : Query
     fun getQueries() : List<Query>
     @Throws(JsonProcessingException::class)
-    fun createQuery(name: String, queryParameters: List<QueryParameters>)
+    fun createQuery(name: String, queryParameters: List<QueryParameters>) : UUID
     @Throws(JsonProcessingException::class)
     fun updateQuery(queryID: UUID, name: String, queryParameters: List<QueryParameters>)
     fun deleteQuery(queryID: UUID)

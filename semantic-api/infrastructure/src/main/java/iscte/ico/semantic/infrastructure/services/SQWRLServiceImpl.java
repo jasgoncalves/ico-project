@@ -331,7 +331,7 @@ public class SQWRLServiceImpl implements SQWRLService {
         while (queryParametersIterator.hasNext()) {
             QueryParameters parameter = queryParametersIterator.next();
             String key = parameter.getArgs().size() > 1
-                    ? parameter.getArgs().get(parameter.getEntityType().equals(QueryEntityType.DatatypeProperty) ? 1 : 0)
+                    ? parameter.getArgs().get(getSomething(parameter))
                     : parameter.getArgs().get(0);
             columns.put(key, parameter.getName());
         }
@@ -351,7 +351,7 @@ public class SQWRLServiceImpl implements SQWRLService {
             while (queryParametersIterator.hasNext()) {
                 QueryParameters parameter =  queryParametersIterator.next();
                 String order = parameter.getArgs().size() > 1
-                        ? parameter.getArgs().get(parameter.getEntityType().equals(QueryEntityType.DatatypeProperty) ? 1 : 0)
+                        ? parameter.getArgs().get(getSomething(parameter))
                         : parameter.getArgs().get(0);
                 queryString.append("?")
                         .append(order)
@@ -386,6 +386,13 @@ public class SQWRLServiceImpl implements SQWRLService {
 //
 //        }
 //    }
+
+    private Integer getSomething(QueryParameters queryParameters){
+
+        return queryParameters.getEntityType().equals(QueryEntityType.DatatypeProperty)
+                ? 1
+                : 0;
+    }
 
     private String getIndividualLabelById(String individualId){
         Optional<OwlIndividual> individual = _individuals

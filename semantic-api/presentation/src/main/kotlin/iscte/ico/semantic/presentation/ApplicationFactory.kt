@@ -4,8 +4,6 @@ package iscte.ico.semantic.presentation
 //import iscte.ico.semantic.application.interfaces.OntologyService
 //import iscte.ico.semantic.application.interfaces.OwlService
 //import iscte.ico.semantic.application.interfaces.SQWRLService
-//import iscte.ico.semantic.infrastructure.services.QueryDAOImpl
-//import iscte.ico.semantic.infrastructure.services.QueryDAO
 //import iscte.ico.semantic.infrastructure.services.DatabaseServiceImpl
 //import iscte.ico.semantic.infrastructure.services.OntologyServiceImpl
 //import iscte.ico.semantic.infrastructure.services.OwlServiceImpl
@@ -31,9 +29,6 @@ class ApplicationFactory {
 //    fun databaseService() : DatabaseService =
 //        DatabaseServiceImpl(queryDAO(), logger())
 //
-//    @Bean
-//    fun queryDAO() : QueryDAO=
-//        QueryDAOImpl()
 //
 //    @Bean
 //    fun logger() : Logger =

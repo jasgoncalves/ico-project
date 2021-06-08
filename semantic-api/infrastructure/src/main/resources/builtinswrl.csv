@@ -6,3 +6,4 @@ swrlb:greaterThan;Greater Than;Similarly to swrlb:lessThan.;
 swrlb:greaterThanOrEqual;Greater Than Or Equal;Similarly to swrlb:lessThanOrEqual.;
 swrlb:stringEqualIgnoreCase;String Equal Ignore Case;Satisfied iff the first argument is the same as the second argument (upper/lower case ignored);
 swrlb:booleanNot;Boolean Not;Satisfied iff the first argument is true and the second argument is false, or vice versa.;
+sameAs;Same as;;

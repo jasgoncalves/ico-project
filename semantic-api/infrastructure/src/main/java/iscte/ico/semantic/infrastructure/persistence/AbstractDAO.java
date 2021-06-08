@@ -1,4 +1,4 @@
-package iscte.ico.semantic.infrastructure.services;
+package iscte.ico.semantic.infrastructure.persistence;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -28,7 +28,9 @@ public abstract class AbstractDAO< T extends Serializable>{
     }
 
     public void save(T entity) {
+
         getCurrentSession().persist( entity );
+
     }
 
     public T update(T entity) {
