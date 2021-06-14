@@ -7,5 +7,5 @@ data class OwlClass (
         val id: String ,
         val label: String,
         val uri: String,
-        val description: String
+        val description: String?
         ) : Entity , Serializable

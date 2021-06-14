@@ -6,5 +6,5 @@ import java.io.Serializable
 data class SwrlRelationalOperator(
         val id: String ,
         val label: String,
-        val description: String
+        val description: String?
         ) : Entity, Serializable

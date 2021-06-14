@@ -5,12 +5,17 @@ import iscte.ico.semantic.application.interfaces.OwlService;
 import iscte.ico.semantic.application.interfaces.SQWRLService;
 import iscte.ico.semantic.application.model.QueryParameters;
 import iscte.ico.semantic.application.model.QueryResult;
+import iscte.ico.semantic.application.model.SchedulingProblemRequest;
 import iscte.ico.semantic.domain.entities.*;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 
 @Service
@@ -67,5 +72,10 @@ public class OwlServiceImpl implements OwlService {
     @Override
     public List<OwlObjectProperty> getObjectProperties() {
         return _ontologyService.getObjectProperties();
+    }
+
+    @Override
+    public byte[] addSchedulingProblemIndividual(@Nullable SchedulingProblemRequest schedulingProblemRequest) throws IOException {
+        return _ontologyService.addSchedulingProblemIndividual(schedulingProblemRequest);
     }
 }

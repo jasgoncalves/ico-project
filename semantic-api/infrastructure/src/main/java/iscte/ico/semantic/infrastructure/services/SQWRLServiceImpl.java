@@ -6,6 +6,7 @@ import iscte.ico.semantic.application.model.QueryEntityType;
 import iscte.ico.semantic.application.model.QueryParameters;
 import iscte.ico.semantic.application.model.QueryResult;
 import iscte.ico.semantic.domain.entities.*;
+import iscte.ico.semantic.infrastructure.InfrastructureConfig;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.swrlapi.sqwrl.SQWRLResult;
 import org.swrlapi.sqwrl.exceptions.SQWRLException;
 
 import java.io.*;
+import java.net.URL;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
@@ -80,7 +82,9 @@ public class SQWRLServiceImpl implements SQWRLService {
 
             File owlFile = new File ("./ontology.owl");
 
-            copyInputStreamToFile(getClass().getClassLoader().getResource("PMOEA.owl").openStream(), owlFile);
+            copyInputStreamToFile(getClass().getClassLoader().getResource(InfrastructureConfig.ONTOLOGY_RESOURCE_FILE).openStream(), owlFile);
+
+//            copyInputStreamToFile(new URL(InfrastructureConfig.ONTOLOGY_URL).openStream(), owlFile);
 
             OWLOntologyManager ontologyManager = OWLManager.createOWLOntologyManager();
             OWLOntology ontology = ontologyManager.loadOntologyFromOntologyDocument(owlFile);
@@ -143,7 +147,7 @@ public class SQWRLServiceImpl implements SQWRLService {
                 Dictionary<String, String> dictionary = new Hashtable<>();
                 for (int i = 0; i < result.getNumberOfColumns(); i++) {
                     if (result.hasNamedIndividualValue(i)) {
-                        String label = getIndividualLabelById(result.getValue(result.getColumnName(i)).toString().replace("PMOEA:", ""));
+                        String label = getIndividualLabelById(result.getValue(result.getColumnName(i)).toString().replace(InfrastructureConfig.ONTOLOGY_PREFIX+":", ""));
                         if (label != null) {
                             dictionary.put(result.getColumnName(i),label);
                         }
@@ -189,7 +193,7 @@ public class SQWRLServiceImpl implements SQWRLService {
                 Dictionary<String, String> dictionary = new Hashtable<>();
                 for (int i = 0; i < result.getNumberOfColumns(); i++) {
                     if (result.hasNamedIndividualValue(i)) {
-                        String label = getIndividualLabelById(result.getValue(result.getColumnName(i)).toString().replace("PMOEA:", ""));
+                        String label = getIndividualLabelById(result.getValue(result.getColumnName(i)).toString().replace(InfrastructureConfig.ONTOLOGY_PREFIX+":", ""));
                         if (label != null) {
                             dictionary.put(result.getColumnName(i),label);
                         }
@@ -228,7 +232,7 @@ public class SQWRLServiceImpl implements SQWRLService {
             switch (queryParameter.getEntityType()){
                 case Class: {
                         queryString
-                            .append("PMOEA:")
+                            .append(InfrastructureConfig.ONTOLOGY_PREFIX+":")
                             .append(queryParameter.getEntity())
                             .append("(?")
                             .append(queryParameter.getArgs().get(0))
@@ -239,7 +243,7 @@ public class SQWRLServiceImpl implements SQWRLService {
                 case DatatypeProperty:
                     {
                         queryString
-                                .append("PMOEA:")
+                                .append(InfrastructureConfig.ONTOLOGY_PREFIX+":")
                                 .append(queryParameter.getEntity())
                                 .append("(");
 
@@ -262,7 +266,7 @@ public class SQWRLServiceImpl implements SQWRLService {
                     break;
                 case ObjectProperty:{
                         queryString
-                                .append("PMOEA:")
+                                .append(InfrastructureConfig.ONTOLOGY_PREFIX+":")
                                 .append(queryParameter.getEntity())
                                 .append("(");
 
@@ -301,7 +305,7 @@ public class SQWRLServiceImpl implements SQWRLService {
                     break;
                 case Individual: {
                         queryString
-                            .append("PMOEA:")
+                            .append(InfrastructureConfig.ONTOLOGY_PREFIX+":")
                             .append(queryParameter.getEntity())
                             .append(")");
                         goToNextAtom = true;

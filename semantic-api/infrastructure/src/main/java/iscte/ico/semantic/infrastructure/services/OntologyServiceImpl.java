@@ -1,19 +1,23 @@
 package iscte.ico.semantic.infrastructure.services;
 
 import iscte.ico.semantic.application.interfaces.OntologyService;
+import iscte.ico.semantic.application.model.PropertyType;
+import iscte.ico.semantic.application.model.SchedulingProblemRequest;
 import iscte.ico.semantic.domain.entities.OwlClass;
 import iscte.ico.semantic.domain.entities.OwlDatatypeProperty;
 import iscte.ico.semantic.domain.entities.OwlIndividual;
 import iscte.ico.semantic.domain.entities.OwlObjectProperty;
+import iscte.ico.semantic.infrastructure.InfrastructureConfig;
 import org.apache.jena.ontology.*;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.util.iterator.ExtendedIterator;
-import org.apache.jena.vocabulary.RDFS;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -26,7 +30,7 @@ public class OntologyServiceImpl implements OntologyService {
     public OntologyServiceImpl(Logger logger) {
         _logger = logger;
         _model = ModelFactory.createOntologyModel();
-        _model.read(getClass().getClassLoader().getResource("PMOEA.owl").toString());
+        _model.read(InfrastructureConfig.ONTOLOGY_URL);
 //        _model.read(getClass().getClassLoader().getResource("Scheduling.owl").toString());
     }
 
@@ -41,12 +45,10 @@ public class OntologyServiceImpl implements OntologyService {
             OntClass ontClass = (OntClass) classes.next();
             String id = ontClass.getLocalName();
             String uri = ontClass.getURI();
-            String label = ontClass.getPropertyValue(RDFS.label) == null
+            String label = ontClass.getLabel("EN") == null
                     ? ontClass.getLocalName()
-                    : ontClass.getPropertyValue(RDFS.label).toString().replace("@en", "");
-            String description = ontClass.getPropertyValue(RDFS.comment) == null
-                    ? ""
-                    : ontClass.getPropertyValue(RDFS.comment).toString();
+                    : ontClass.getLabel("EN");
+            String description = ontClass.getComment("EN");
 
             if(id != null)
                 listClasses.add(new OwlClass( id, label, uri, description));
@@ -65,12 +67,10 @@ public class OntologyServiceImpl implements OntologyService {
             Individual individual = (Individual) individuals.next();
             String id = individual.getLocalName();
             String uri = individual.getURI();
-            String label = individual.getPropertyValue(RDFS.label) == null
-                    ? individual.getLocalName()
-                    : individual.getPropertyValue(RDFS.label).toString().replace("@en", "");
-            String description = individual.getPropertyValue(RDFS.comment) == null
-                    ? ""
-                    : individual.getPropertyValue(RDFS.comment).toString();
+            String label = individual.getLabel("EN") == null
+                ? individual.getLocalName()
+                : individual.getLabel("EN");
+            String description = individual.getComment("EN");
 
             if(id != null)
                 listIndividuals.add(new OwlIndividual( id, label, uri, description));
@@ -89,6 +89,7 @@ public class OntologyServiceImpl implements OntologyService {
             DatatypeProperty datatypeProperty = (DatatypeProperty) datatypeProperties.next();
             String id = datatypeProperty.getLocalName();
             String uri = datatypeProperty.getURI();
+            String domainId = datatypeProperty.getDomain().getLocalName();
             String domainLabel = datatypeProperty.getDomain() == null
                     ? null
                     : datatypeProperty.getDomain().getLabel("EN");
@@ -101,7 +102,7 @@ public class OntologyServiceImpl implements OntologyService {
             String description = datatypeProperty.getComment("EN");
 
             if(id != null)
-                listDatatypeProperties.add(new OwlDatatypeProperty( id, label, dataType, domainLabel, uri, description));
+                listDatatypeProperties.add(new OwlDatatypeProperty( id, label, dataType, domainId, domainLabel, uri, description));
         }
         return listDatatypeProperties;
     }
@@ -121,14 +122,110 @@ public class OntologyServiceImpl implements OntologyService {
                     ? objectProperty.getLocalName()
                     : objectProperty.getLabel("EN");
             String description = objectProperty.getComment("EN");
+            String domainId = objectProperty.getDomain() == null
+                    ? null
+                    : objectProperty.getDomain().getLocalName();
             String domainLabel = objectProperty.getDomain() == null
                     ? null
                     : objectProperty.getDomain().getLabel("EN");
+            String rangeId = objectProperty.getRange() == null
+                    ? null
+                    : objectProperty.getRange().getLocalName();
 
             if(id != null)
-                listObjectProperties.add(new OwlObjectProperty( id, label, domainLabel, uri, description));
+                listObjectProperties.add(new OwlObjectProperty( id, label, domainId, domainLabel, rangeId, uri, description));
         }
         return listObjectProperties;
+    }
+
+    @Override
+    public byte[] addSchedulingProblemIndividual(SchedulingProblemRequest schedulingProblemRequest) throws IOException {
+
+        String scheduling = _model.getNsPrefixURI("scheduling");
+        String owl = _model.getNsPrefixURI("owl");
+        OntClass c = _model.getOntClass(owl+"NamedIndividual");
+
+        Individual individual = _model.createIndividual( scheduling + schedulingProblemRequest.getName(), c );
+        individual.addRDFType(_model.getOntClass(scheduling+"SchedulingProblem"));
+
+        Arrays.stream(schedulingProblemRequest.getSchedulingProblem().getProperties()).forEach(
+                element-> {individual.addProperty(_model.getDatatypeProperty(scheduling+element.getName()),element.getValue());}
+        );
+
+        Arrays.stream(schedulingProblemRequest.getMachines()).forEach(
+                element -> {
+                    Individual machine = _model.createIndividual( scheduling + element.getName(), c );
+                    machine.addRDFType(_model.getOntClass(scheduling+"Machine"));
+                    Arrays.stream(element.getProperties()).forEach(
+                            e -> {machine.addProperty(_model.getDatatypeProperty(scheduling+e.getName()),e.getValue());}
+                    );
+
+                }
+        );
+
+        Individual order = _model.createIndividual( scheduling + schedulingProblemRequest.getOrder().getName(), c );
+        order.addRDFType(_model.getOntClass(scheduling+"Order"));
+
+        Arrays.stream(schedulingProblemRequest.getOrder().getProperties()).forEach(
+                element-> {order.addProperty(_model.getDatatypeProperty(scheduling+element.getName()),element.getValue());}
+        );
+
+        Arrays.stream(schedulingProblemRequest.getJobFamilies()).forEach(
+                element -> {
+                    Individual jobFamily = _model.createIndividual( scheduling + element.getName(), c );
+                    jobFamily.addRDFType(_model.getOntClass(scheduling+"JobFamily"));
+                }
+        );
+
+        Arrays.stream(schedulingProblemRequest.getJobs()).forEach(
+                element -> {
+                    Individual job = _model.createIndividual( scheduling + element.getName(), c );
+                    job.addRDFType(_model.getOntClass(scheduling+"Job"));
+                    Arrays.stream(element.getProperties()).forEach(
+                            e -> {
+                                if (e.getType() == PropertyType.DatatypeProperty) {
+                                    job.addProperty(_model.getDatatypeProperty(scheduling + e.getName()), e.getValue());
+                                }
+                                if (e.getType() == PropertyType.ObjectProperty) {
+                                    job.addProperty(_model.getObjectProperty(scheduling + e.getName()), e.getValue());
+                                }
+                            }
+                    );
+
+                }
+        );
+
+        Arrays.stream(schedulingProblemRequest.getTasks()).forEach(
+                element -> {
+                    Individual task = _model.createIndividual( scheduling + element.getName(), c );
+                    task.addRDFType(_model.getOntClass(scheduling+"Task"));
+                    Arrays.stream(element.getProperties()).forEach(
+                            e -> {
+                                if (e.getType() == PropertyType.DatatypeProperty) {
+                                    task.addProperty(_model.getDatatypeProperty(scheduling + e.getName()), e.getValue());
+                                }
+                                if (e.getType() == PropertyType.ObjectProperty) {
+                                    task.addProperty(_model.getObjectProperty(scheduling + e.getName()), e.getValue());
+                                }
+                            }
+                    );
+
+                }
+        );
+
+//        Individual objectiveFunction = _model.createIndividual( scheduling + schedulingProblemRequest.getObjectiveFunction().getName(), c );
+//        objectiveFunction.addRDFType(_model.getOntClass(scheduling+"ObjectiveFunction"));
+
+        Arrays.stream(schedulingProblemRequest.getObjectiveFunction().getProperties()).forEach(
+                element-> {individual.addProperty(_model.getObjectProperty(scheduling+"hasObjectiveFunction"),element.getName());}
+        );
+
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+        _model.write(out,"RDF/XML");
+
+        return out.toByteArray();
+
     }
 
 }
