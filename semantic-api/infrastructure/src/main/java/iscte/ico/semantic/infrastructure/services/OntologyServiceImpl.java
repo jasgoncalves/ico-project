@@ -30,8 +30,10 @@ public class OntologyServiceImpl implements OntologyService {
     public OntologyServiceImpl(Logger logger) {
         _logger = logger;
         _model = ModelFactory.createOntologyModel();
-        _model.read(InfrastructureConfig.ONTOLOGY_URL);
-//        _model.read(getClass().getClassLoader().getResource("Scheduling.owl").toString());
+        if(InfrastructureConfig.USE_URL)
+            _model.read(InfrastructureConfig.ONTOLOGY_URL);
+        else
+            _model.read(getClass().getClassLoader().getResource(InfrastructureConfig.ONTOLOGY_RESOURCE_FILE).toString());
     }
 
     @Override
@@ -89,7 +91,9 @@ public class OntologyServiceImpl implements OntologyService {
             DatatypeProperty datatypeProperty = (DatatypeProperty) datatypeProperties.next();
             String id = datatypeProperty.getLocalName();
             String uri = datatypeProperty.getURI();
-            String domainId = datatypeProperty.getDomain().getLocalName();
+            String domainId = datatypeProperty.getDomain() == null
+                    ? null
+                    : datatypeProperty.getDomain().getLocalName();
             String domainLabel = datatypeProperty.getDomain() == null
                     ? null
                     : datatypeProperty.getDomain().getLabel("EN");

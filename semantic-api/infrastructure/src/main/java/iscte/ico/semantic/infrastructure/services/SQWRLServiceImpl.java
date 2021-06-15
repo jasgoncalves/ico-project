@@ -337,7 +337,8 @@ public class SQWRLServiceImpl implements SQWRLService {
             String key = parameter.getArgs().size() > 1
                     ? parameter.getArgs().get(getSomething(parameter))
                     : parameter.getArgs().get(0);
-            columns.put(key, parameter.getName());
+            if(columns.get(key) == null)
+                columns.put(key, parameter.getName());
         }
 
         Enumeration<String> keys = columns.keys();
@@ -347,6 +348,17 @@ public class SQWRLServiceImpl implements SQWRLService {
                 .append(keys.nextElement())
                 .append(keys.hasMoreElements()?", ":")");
         }
+
+        queryParametersIterator =
+            queryParameters
+                    .stream()
+                    .filter(x->
+                            (x.getEntityType().equals(QueryEntityType.Class)
+                                    || x.getEntityType().equals(QueryEntityType.ObjectProperty)
+                                    || x.getEntityType().equals(QueryEntityType.DatatypeProperty))
+                                    && x.isOrderedBy()
+                    )
+                    .iterator();
 
         if(queryParametersIterator.hasNext()) {
 
