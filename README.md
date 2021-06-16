@@ -105,6 +105,204 @@ No modulo `infrastructure` existe uma classe (`Bootstraper.kt`) onde e possivel 
 
 ```
 
+### Criacao de queries via API - Propriedade `args`
+
+A propriedade `args` e a propriedade mais complexa do corpo do request para execucao de um query abaixo alguns exemplos da sua utilizacao.
+
+1. No uso mais simples apenas contem uma variavel que representa a nossa entidade.
+
+```JSON
+{
+    "name": "SchedulingProblem",
+    "query_parameters": [
+        {
+            "entity_type": "Class",
+            "entity": "SchedulingProblem",
+            "name": "SchedulingProblem",
+            "is_ordered_by": false,
+            "is_column_showed": true,
+            "args": [
+                "m"
+            ]
+        }
+    ]
+}
+```
+
+2. No uso do ObjectProperty a propriedade `args` podera conter duas variaveis, ambas representam os individuos do OWL.
+
+```JSON
+{
+    "name": "",
+    "query_parameters": [
+        {
+            "entity_type": "Class",
+            "entity": "OWLClass_9598b33d_f57f_4f27_942e_fa47ade955e3",
+            "name": "Reseracher",
+            "is_ordered_by": false,
+            "is_column_showed": true,
+            "args": [
+                "z"
+            ]
+        },
+        {
+            "entity_type": "ObjectProperty",
+            "entity": "OWLObjectProperty_95ca6fad_b96f_472a_97ed_92795d67fd2c",
+            "name": "hasAuthor",
+            "is_ordered_by": false,
+            "is_column_showed": true,
+            "args": [
+               
+                "y", "z"
+            ]
+        }
+    ]
+}
+```
+
+2. No uso do ObjectProperty a propriedade `args` podera conter duas variaveis, ambas representam os individuos do OWL.
+
+```JSON
+{
+    "name": "",
+    "query_parameters": [
+        {
+            "entity_type": "Class",
+            "entity": "OWLClass_9598b33d_f57f_4f27_942e_fa47ade955e3",
+            "name": "Reseracher",
+            "is_ordered_by": false,
+            "is_column_showed": true,
+            "args": [
+                "z"
+            ]
+        },
+        {
+            "entity_type": "ObjectProperty",
+            "entity": "OWLObjectProperty_95ca6fad_b96f_472a_97ed_92795d67fd2c",
+            "name": "hasAuthor",
+            "is_ordered_by": false,
+            "is_column_showed": true,
+            "args": [
+               
+                "y", "z"
+            ]
+        }
+    ]
+}
+```
+
+3. No uso do DataProperty, tal como no item anterior, a propriedade `args` podera conter duas variaveis, a primeira variavel representara o individuo OWL e a segunda o valor do dado.
+
+```JSON
+{
+    "name": "Metaheutistics and their developing years ordered per year",
+    "query_parameters": [
+        {
+            "entity_type": "Class",
+            "entity": "OWLClass_78aa5e30_4a52_440d_b144_1b2414334f9e",
+            "name": "MetaHeuristic",
+            "is_ordered_by": false,
+            "is_column_showed": true,
+            "args": [
+                "x"
+            ]
+        },
+        {
+            "entity_type": "DatatypeProperty",
+            "entity": "OWLDataProperty_2d368f15_5420_4f5c_adb7_ebff6e417fc0",
+            "name": "hasDevelopingYear",
+            "is_ordered_by": true,
+            "is_column_showed": true,
+            "args": [
+                "x",
+                "z"
+            ]
+        }
+    ]
+}
+```
+
+4. Em caso de valores/individuos especificos, entao para as entidades dos tipos ObjectProperty e DatatypeProperty a propriedade `args` apenas contera uma variavel.
+
+ObjectProperty
+```JSON
+{
+    "name": "What are the metaheurisitics that were tested in Knapack problem?",
+    "query_parameters": [
+        {
+            "entity_type": "Class",
+            "entity": "OWLClass_78aa5e30_4a52_440d_b144_1b2414334f9e",
+            "name": "MetaHeuristic",
+            "is_ordered_by": false,
+            "is_column_showed": true,
+            "args": [
+                "z"
+            ]
+        },
+        {
+            "entity_type": "ObjectProperty",
+            "entity": "OWLObjectProperty_6341b9ed_8594_47b2_9bc7_3075bcde4d20",
+            "name": "canSolve",
+            "is_ordered_by": false,
+            "is_column_showed": true,
+            "args": [
+                "z"
+            ]
+        },
+        {
+            "entity_type": "Individual",
+            "entity": "OWLNamedIndividual_f5bf1e70_95e7_4b25_8f96_db7a3d8b8505",
+            "name": "Knapsack_8",
+            "is_ordered_by": false,
+            "is_column_showed": true,
+            "args": [
+                "x"
+            ]
+        }
+    ]
+}
+```
+
+DatatypeProperty
+```JSON
+{
+    "name": "Wich order relations have been proposed to many-objective optimisation?",
+    "query_parameters": [
+        {
+            "entity_type": "Class",
+            "entity": "OWLClass_78aa5e30_4a52_440d_b144_1b2414334f9e",
+            "name": "MetaHeuristic",
+            "is_ordered_by": false,
+            "is_column_showed": true,
+            "args": [
+                "x"
+            ]
+        },
+        {
+            "entity_type": "DatatypeProperty",
+            "entity": "OWLDataProperty_eaa7d01d_6083_4b47_a247_2ebebcbd2837",
+            "name": "isManyObjectiveProblem",
+            "is_ordered_by": false,
+            "is_column_showed": true,
+            "args": [
+                "z"
+            ]
+        },
+        {
+            "entity_type": "Literal",
+            "entity": "OWLDataProperty_eaa7d01d_6083_4b47_a247_2ebebcbd2837",
+            "name": "Literal",
+            "is_ordered_by": false,
+            "is_column_showed": false,
+            "args": [
+                "true"
+            ]
+        }
+    ]
+}
+```
+5. 
+6. 
 
 ## Endpoints
 
