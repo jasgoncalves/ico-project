@@ -19,6 +19,10 @@ Para este projeto optei como padrao arquitetural da aplicacao o pardrao _Clean A
 
 ![image](https://user-images.githubusercontent.com/33223967/122293324-cfdf7a80-ceee-11eb-9725-4dceef05967b.png)
 
+Diagrama da aplicacao
+
+![image](https://user-images.githubusercontent.com/33223967/122305839-61ef7f00-ceff-11eb-8a24-39cebc349fbb.png)
+
 ## Tecnologias 
 
 Tecnologias utilizadas mais relevantes:
@@ -33,6 +37,9 @@ Linguagem:
 - Hibernate 5.4.2 (https://hibernate.org/)
 - H2 Database Engine 1.4.2 (https://h2database.com/html/main.html)
 - Spring Boot - 5.1.6 (https://spring.io/projects/spring-boot) 
+
+## Detalhes importantes:
+
 
 
 ## Endpoints
