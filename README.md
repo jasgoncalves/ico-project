@@ -383,7 +383,7 @@ Response:
 }
 ```
 
-**[GET]** /semantic/api/v1/sqrwl/query/{id} - Retorna todos os queries guardados na base de dados.
+**[GET]** /semantic/api/v1/sqrwl/query/{id} - Retorna o query de um ID especifico.
 
 | Nome da Propriedade  | Descricao  |
 |---|---|
@@ -396,7 +396,7 @@ Response:
 | query_parameters.is_column_showed | Se esta propriedade devera ser retornada na response. (true, false) |
 | query_parameters.args | Com excepcao do tipo de entidade Literal, que o conteudo do array e o valor literal desta entidade, as restantes entidades o valor corresponde ao valor da variavel no query|
 
-Exemplo: /semantic/api/v1/sqrwl/query/2337fc16-5151-443e-96c5-041c55165235
+Exemplo: `/semantic/api/v1/sqrwl/query/2337fc16-5151-443e-96c5-041c55165235`
 
 Response:
 
@@ -425,6 +425,390 @@ Response:
     }
 }
 ```
+
+**[PUT]** /semantic/api/v1/sqrwl/query/{id} - Atualiza o query de um ID especifico.
+
+| Nome da Propriedade  | Descricao  |
+|---|---|
+| name | Nome do query a ser executado | 
+| query_parameters.entity_type | Tipo de entidade. (Class, Individuals, ObjectProperty, DatatypeProperty, Literal, RelationalOperator | 
+| query_parameters.entity | Id da entidade na ontologia | 
+| query_parameters.name | Nome da propriedade a ser retornada na response deste request |
+| query_parameters.is_ordered_by | Se o resultado deve ser ordenado por esta entidade. (true, false) |
+| query_parameters.is_column_showed | Se esta propriedade devera ser retornada na response. (true, false) |
+| query_parameters.args | Com excepcao do tipo de entidade Literal, que o conteudo do array e o valor literal desta entidade, as restantes entidades o valor corresponde ao valor da variavel no query|
+
+Exemplo: `/semantic/api/v1/sqrwl/query/2337fc16-5151-443e-96c5-041c55165235`
+
+Request:
+
+```JSON
+{
+    "name": "Problema de Escalonamento",
+    "query_parameters": [
+        {
+            "entity_type": "Class",
+            "entity": "SchedulingProblem",
+            "name": "SchedulingProblem",
+            "is_ordered_by": false,
+            "is_column_showed": true,
+            "args": [
+                "m"
+            ]
+        }
+    ]
+}
+```
+
+| Nome da Propriedade  | Descricao  |
+|---|---|
+| result | Resultado retornado apos execucao do query | 
+| rows | Numero de registos retornados | 
+| swrlquery | Query executado no servidor | 
+
+Response:
+
+```JSON
+{
+    "data": {
+        "result": [
+            {
+                "SchedulingProblem": "myspecificproblem"
+            },
+            {
+                "SchedulingProblem": "totalWeightedCompletionTime"
+            },
+            {
+                "SchedulingProblem": "discountedTotalWeightedCompletionTime"
+            },
+            {
+                "SchedulingProblem": "totalWeightedTardiness"
+            }
+        ],
+        "rows": 4,
+        "swrlquery": "scheduling:SchedulingProblem(?m) -> sqwrl:select(?m) ^ sqwrl:columnNames(\"SchedulingProblem\")"
+    },
+    "error": {
+        "statusCode": 200,
+        "statusDescription": "200 OK",
+        "description": "Success"
+    }
+}
+```
+
+**[DELETE]** /semantic/api/v1/sqrwl/query/{id} - Elimina o query de um ID especifico.
+
+Exemplo: `/semantic/api/v1/sqrwl/query/2337fc16-5151-443e-96c5-041c55165235`
+
+Response:
+
+```JSON
+{
+    "error": {
+        "statusCode": 204,
+        "statusDescription": "204 NO_CONTENT",
+        "description": "Success"
+    }
+}
+```
+
+
+**[POST]** /semantic/api/v1/scheduling-problem - Endpoint especifico para a demonstracao do Scheduling Problem, mas que permite tambem demonstrar a edicao de uma ontologia usando a API.
+
+A response deste endpoint e o conteudo do ficheiro OWL apos alteracao efetua a partir do request, o content type da response e `application/octet-stream`
+
+| Nome da Propriedade  | Descricao  |
+|---|---|
+| name | Nome do problema de escalonamento | 
+| schedulingProblem | Nome e respectivas propriedades do problema de escalonamento | 
+| machines | Nome e respectivas propriedades das maquinas que compoem o problema de escalonamento | 
+| order | Nome e respectivas propriedades da ordem que compoem o problema de escalonamento | 
+| jobs | Nome e respectivas propriedades dos jobs da ordem que compoem o problema de escalonamento | 
+| tasks | Nome e respectivas propriedades das tarefas de cada job da ordem que compoem o problema de escalonamento | 
+| objectiveFunction | Funcoes objetivo que compoem o problema de escalonamento | 
+
+
+Request:
+
+```JSON
+{
+    "name":"TestScheduling",
+    "schedulingProblem":{
+        "name":"TestScheduling",
+        "properties":[
+            {
+                "name":"isFlowShopProblem",
+                "value":"true",
+                "type":"DatatypeProperty"
+            },
+            {
+                "name":"hasNumberOfMachines",
+                "value":"3",
+                "type":"DatatypeProperty"
+            }
+        ]
+    },
+    "machines":[
+        {
+            "name":"Machine1",
+            "properties":[
+                {
+                    "name":"hasBreakdownTimeInSeconds",
+                    "value":"100",
+                    "type":"DatatypeProperty"
+                },
+                {
+                    "name":"hasBatchProcessing",
+                    "value":"5",
+                    "type":"DatatypeProperty"
+                }
+            ]
+
+        },
+        {
+            "name":"Machine2",
+            "properties":[
+                {
+                    "name":"hasBreakdownTimeInSeconds",
+                    "value":"10",
+                    "type":"DatatypeProperty"
+                },
+                {
+                    "name":"hasBatchProcessing",
+                    "value":"2",
+                    "type":"DatatypeProperty"
+                }
+            ]
+
+        },
+        {
+            "name":"Machine3",
+            "properties":[
+                {
+                    "name":"hasBreakdownTimeInSeconds",
+                    "value":"0",
+                    "type":"DatatypeProperty"
+                },
+                {
+                    "name":"hasBatchProcessing",
+                    "value":"1",
+                    "type":"DatatypeProperty"
+                }
+            ]
+
+        }
+    ],
+    "order":{
+        "name":"TestSchedulingOrder",
+        "properties":[
+                {
+                    "name":"hasAllJobsIdentical",
+                    "value":"true",
+                    "type":"DatatypeProperty"
+                },
+                {
+                    "name":"hasJobFamilies",
+                    "value":"2",
+                    "type":"DatatypeProperty"
+                },
+                {
+                    "name":"hasNumberOfJobs",
+                    "value":"4",
+                    "type":"DatatypeProperty"
+                },
+                {
+                    "name":"hasJobPrecedenceConstraints",
+                    "value":"true",
+                    "type":"DatatypeProperty"
+                }
+            ]
+    },
+    "jobFamilies":[],
+    "jobs":[
+        {
+            "name":"Job1",
+            "properties":[
+                {
+                    "name":"hasNumberOfTasks",
+                    "value":"1",
+                    "type":"DatatypeProperty"
+                },
+                {
+                    "name":"hasNoWaitConstraints",
+                    "value":"true",
+                    "type":"DatatypeProperty"
+                },
+                {
+                    "name":"belongsToJobFamily",
+                    "value":"JobFamily1",
+                    "type":"ObjectProperty"
+                },
+                {
+                    "name":"precedesJob",
+                    "value":"Job3",
+                    "type":"ObjectProperty"
+                }
+            ]
+
+        },
+        {
+            "name":"Job2",
+            "properties":[
+                {
+                    "name":"hasNumberOfTasks",
+                    "value":"2",
+                    "type":"DatatypeProperty"
+                },
+                {
+                    "name":"hasNoWaitConstraints",
+                    "value":"false",
+                    "type":"DatatypeProperty"
+                },
+                {
+                    "name":"belongsToJobFamily",
+                    "value":"JobFamily2",
+                    "type":"ObjectProperty"
+                },
+                {
+                    "name":"precedesJob",
+                    "value":"Job3",
+                    "type":"ObjectProperty"
+                }
+            ]
+
+        },
+        {
+            "name":"Job3",
+            "properties":[
+                {
+                    "name":"hasNumberOfTasks",
+                    "value":"2",
+                    "type":"DatatypeProperty"
+                },
+                {
+                    "name":"hasNoWaitConstraints",
+                    "value":"false",
+                    "type":"DatatypeProperty"
+                },
+                {
+                    "name":"belongsToJobFamily",
+                    "value":"JobFamily2",
+                    "type":"ObjectProperty"
+                }
+            ]
+
+        },
+        {
+            "name":"Job4",
+            "properties":[
+                {
+                    "name":"hasNumberOfTasks",
+                    "value":"2",
+                    "type":"DatatypeProperty"
+                },
+                {
+                    "name":"hasNoWaitConstraints",
+                    "value":"false",
+                    "type":"DatatypeProperty"
+                },
+                {
+                    "name":"belongsToJobFamily",
+                    "value":"JobFamily2",
+                    "type":"ObjectProperty"
+                },
+                {
+                    "name":"precedesJob",
+                    "value":"Job3",
+                    "type":"ObjectProperty"
+                }
+            ]
+
+        }],
+    "tasks":[
+        {
+            "name":"Task1",
+            "properties":[
+                {
+                    "name":"hasProcessingTimeInSeconds",
+                    "value":"3",
+                    "type":"DatatypeProperty"
+                },
+                {
+                    "name":"belongsToJob",
+                    "value":"Job1",
+                    "type":"ObjectProperty"
+                }
+            ]
+
+        },
+        {
+            "name":"Task2",
+            "properties":[
+                {
+                    "name":"hasProcessingTimeInSeconds",
+                    "value":"4",
+                    "type":"DatatypeProperty"
+                },
+                {
+                    "name":"belongsToJob",
+                    "value":"Job1",
+                    "type":"ObjectProperty"
+                },
+                {
+                    "name":"belongsToJobFamily",
+                    "value":"Task1",
+                    "type":"ObjectProperty"
+                }
+            ]
+
+        },
+        {
+            "name":"Task3",
+            "properties":[
+                {
+                    "name":"hasProcessingTimeInSeconds",
+                    "value":"5",
+                    "type":"DatatypeProperty"
+                },
+                {
+                    "name":"belongsToJob",
+                    "value":"Job2",
+                    "type":"ObjectProperty"
+                }
+            ]
+
+        }],
+    "objectiveFunction":{
+        "name":"TestSchedulingObjectiveFunction",
+        "properties":[
+            {
+                "name":"makespan",
+                "value":"",
+                "type":"ObjectProperty"
+            },
+            {
+                "name":"totalWeightedCompletionTime",
+                "value":"",
+                "type":"ObjectProperty"
+            }
+        ]
+    }
+}
+```
+
+
+Exemplo de erro para todos endpoints:
+
+```JSON
+{
+    "error": {
+        "statusCode": 500,
+        "statusDescription": "500 INTERNAL_SERVER_ERROR",
+        "description": "Invalid SWRL atom predicate 'scheduling:OWLClass_9598b33d_f57f_4f27_942e_fa47ade955e3'"
+    }
+}
+```
+
 
 ### Referencias
 
