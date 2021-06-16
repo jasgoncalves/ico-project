@@ -324,10 +324,107 @@ Response:
 }
 ```
 
+**[GET]** /semantic/api/v1/sqrwl/query - Retorna todos os queries guardados na base de dados.
 
+| Nome da Propriedade  | Descricao  |
+|---|---|
+| name | ID do query | 
+| name | Nome do query | 
+| query_parameters.entity_type | Tipo de entidade. (Class, Individuals, ObjectProperty, DatatypeProperty, Literal, RelationalOperator | 
+| query_parameters.entity | Id da entidade na ontologia | 
+| query_parameters.name | Nome da propriedade a ser retornada na response deste request |
+| query_parameters.is_ordered_by | Se o resultado deve ser ordenado por esta entidade. (true, false) |
+| query_parameters.is_column_showed | Se esta propriedade devera ser retornada na response. (true, false) |
+| query_parameters.args | Com excepcao do tipo de entidade Literal, que o conteudo do array e o valor literal desta entidade, as restantes entidades o valor corresponde ao valor da variavel no query|
 
+Response:
 
+```JSON
+{
+    "data": [
+        {
+            "id": "5215934a-2fa9-4289-9181-e10e7892505a",
+            "name": "Researches",
+            "query_parameters": [
+                {
+                    "entityType": "Class",
+                    "entity": "OWLClass_9598b33d_f57f_4f27_942e_fa47ade955e3",
+                    "name": "Researcher",
+                    "orderedBy": false,
+                    "columnShowed": true,
+                    "args": [
+                        "z"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "16c3af66-7dc7-47b3-b89d-3b9dd27d515d",
+            "name": "Implementation Library",
+            "query_parameters": [
+                {
+                    "entityType": "Class",
+                    "entity": "OWLClass_cccfbe7c_e1d1_4a2d_8022_5603a6e0257b",
+                    "name": "ImplementationLibrary",
+                    "orderedBy": false,
+                    "columnShowed": true,
+                    "args": [
+                        "z"
+                    ]
+                }
+            ]
+        }
+    ],
+    "error": {
+        "statusCode": 200,
+        "statusDescription": "200 OK",
+        "description": "Success"
+    }
+}
+```
 
+**[GET]** /semantic/api/v1/sqrwl/query/{id} - Retorna todos os queries guardados na base de dados.
+
+| Nome da Propriedade  | Descricao  |
+|---|---|
+| name | ID do query | 
+| name | Nome do query | 
+| query_parameters.entity_type | Tipo de entidade. (Class, Individuals, ObjectProperty, DatatypeProperty, Literal, RelationalOperator | 
+| query_parameters.entity | Id da entidade na ontologia | 
+| query_parameters.name | Nome da propriedade a ser retornada na response deste request |
+| query_parameters.is_ordered_by | Se o resultado deve ser ordenado por esta entidade. (true, false) |
+| query_parameters.is_column_showed | Se esta propriedade devera ser retornada na response. (true, false) |
+| query_parameters.args | Com excepcao do tipo de entidade Literal, que o conteudo do array e o valor literal desta entidade, as restantes entidades o valor corresponde ao valor da variavel no query|
+
+Exemplo: /semantic/api/v1/sqrwl/query/2337fc16-5151-443e-96c5-041c55165235
+
+Response:
+
+```JSON
+{
+    "data": {
+        "id": "2337fc16-5151-443e-96c5-041c55165235",
+        "name": "SchedulingProblem",
+        "query_parameters": [
+            {
+                "entityType": "Class",
+                "entity": "SchedulingProblem",
+                "name": "SchedulingProblem",
+                "orderedBy": false,
+                "columnShowed": true,
+                "args": [
+                    "m"
+                ]
+            }
+        ]
+    },
+    "error": {
+        "statusCode": 200,
+        "statusDescription": "200 OK",
+        "description": "Success"
+    }
+}
+```
 
 ### Referencias
 
