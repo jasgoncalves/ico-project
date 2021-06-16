@@ -107,7 +107,7 @@ No modulo `infrastructure` existe uma classe (`Bootstraper.kt`) onde e possivel 
 
 ### Criacao de queries via API - Propriedade `args`
 
-A propriedade `args` e a propriedade mais complexa do corpo do request para execucao de um query abaixo alguns exemplos da sua utilizacao.
+A propriedade `args` e a propriedade mais complexa do corpo do request para execucao de um query. Abaixo alguns exemplos da sua utilizacao.
 
 1. No uso mais simples apenas contem uma variavel que representa a nossa entidade.
 
