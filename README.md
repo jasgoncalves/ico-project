@@ -51,7 +51,7 @@ No modulo `infrastructure` existe uma classe (`InfrastrutureConfig.kt`) que perm
 | ONTOLOGY_PREFIX | Prefixo a ser utilizado na ontologia  | 
 | ONTOLOGY_RESOURCE_FILE | Nome do ficheiro OWL guardado na pasta resources da camada `infrastructure` e que podera ser utilizado no caso do paramtero `USE_URL` e igual a `false` | 
 
-![image](https://user-images.githubusercontent.com/33223967/122306742-ef7f9e80-cf00-11eb-895e-aa4b4618206d.png)
+![image](https://user-images.githubusercontent.com/33223967/122307780-e1328200-cf02-11eb-98af-17f17438f79d.png)
 
 
 ### Operadores Relacionais
