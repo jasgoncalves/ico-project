@@ -40,6 +40,16 @@ Linguagem:
 
 ## Detalhes importantes:
 
+### Configuracao Ontologia
+
+No modulo `infrastructure` existe uma classe (`InfrastrutureConfig.kt`) que permite definir a ontologia a ser usada com os seguintes parametros.
+
+| Nome da Parametro  | Descricao  |
+|---|---|
+| ONTOLOGY_URL | URL da ontologia a ser importada pela aplicacao | 
+| USE_URL | Se a ontologia devera ser importada da URL definida no parametro `ONTOLOGY_URL` | 
+| ONTOLOGY_PREFIX | Prefixo a ser utilizado na ontologia  | 
+| ONTOLOGY_RESOURCE_FILE | Nome do ficheiro OWL guardado na pasta resources da camada `infrastructure` e que podera ser utilizado no caso do paramtero `USE_URL` e igual a `false` | 
 
 
 ## Endpoints
