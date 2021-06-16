@@ -21,7 +21,7 @@ Para este projeto optei como padrao arquitetural da aplicacao o pardrao _Clean A
 
 ## Tecnologias 
 
-Mais relevantes:
+Tecnologias utilizadas mais relevantes:
 
 Linguagem: 
 
@@ -38,6 +38,13 @@ Linguagem:
 ## Endpoints
 
 [GET] /semantic/api/v1/classes - Retorna todas as classes que compoe a ontologia.
+
+| Nome da Propriedade  | Descricao  |
+|---|---|
+| id | ID da classe na ontologia | 
+| label | Label da classe na ontologia | 
+| uri | URI da classe na ontologia  | 
+| description | Descricao da classe na ontologia  | 
 
 Response:
 
