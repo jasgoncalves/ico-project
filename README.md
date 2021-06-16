@@ -64,8 +64,7 @@ Atualmente a aplicacao apenas possui uma selecao de 9 operadores relacionais, qu
 |---|---|
 | swrlb:equal | Satisfied iff the first argument and the second argument are the same. | 
 | swrlb:notEqual | The negation of swrlb:equal. | 
-| swrlb:lessThan | Satisfied iff the first argument and the second argument are both in some implemented type and the first argument is less than the second argument according to a type-specific ordering (partial or total), if there is one defined for the type. The ordering function for the type of untyped literals is the partial order defined as string ordering when the language tags are the same (or both missing) and incomparable otherwise.;
-  | 
+| swrlb:lessThan | Satisfied iff the first argument and the second argument are both in some implemented type and the first argument is less than the second argument according to a type-specific ordering (partial or total), if there is one defined for the type. The ordering function for the type of untyped literals is the partial order defined as string ordering when the language tags are the same (or both missing) and incomparable otherwise.;| 
 | swrlb:lessThanOrEqual | Either less than, as above, or equal, as above. | 
 | swrlb:greaterThan | Similarly to swrlb:lessThan. | 
 | swrlb:greaterThanOrEqual | Similarly to swrlb:lessThanOrEqual. | 
