@@ -68,6 +68,13 @@ Response:
 
 [GET] /semantic/api/v1/individuals - Retorna todos individuos que compoe a ontologia.
 
+| Nome da Propriedade  | Descricao  |
+|---|---|
+| id | ID do individuo na ontologia | 
+| label | Label do individuo na ontologia | 
+| uri | URI do individuo na ontologia  | 
+| description | Descricao do individuo na ontologia  | 
+
 Response:
 
 ```JSON
@@ -96,6 +103,15 @@ Response:
 
 [GET] /semantic/api/v1/object-properties - Retorna todas as _object properties_ que compoe a ontologia.
 
+| Nome da Propriedade  | Descricao  |
+|---|---|
+| id | ID da propriedade na ontologia | 
+| label | Label da propriedade na ontologia | 
+| damainId | ID do dominio da propriedade na ontologia  | 
+| domainLabel | Label do dominio da propriedade na ontologia  | 
+| uri | URI da propriedade na ontologia  | 
+| description | Descricao da propriedade na ontologia  | 
+
 Response:
 
 ```JSON
@@ -121,6 +137,16 @@ Response:
 
 [GET] /semantic/api/v1/datatype-properties - Retorna todas as _datatype properties_ que compoe a ontologia.
 
+| Nome da Propriedade  | Descricao  |
+|---|---|
+| id | ID da propriedade na ontologia | 
+| label | Label da propriedade na ontologia | 
+| dataType | Tipo de dado da propriedade na ontologia | 
+| damainId | ID do dominio da propriedade na ontologia  | 
+| domainLabel | Label do dominio da propriedade na ontologia  | 
+| uri | URI da propriedade na ontologia  | 
+| description | Descricao da propriedade na ontologia  | 
+
 Response:
 
 ```JSON
@@ -145,6 +171,16 @@ Response:
 ```
 
 [GET] /semantic/api/v1/relational-operators - Retorna todas a lista de operadores relacionais SWRL diponiveis na API que compoe a ontologia.
+
+| Nome da Propriedade  | Descricao  |
+|---|---|
+| id | ID do individuo na ontologia | 
+| label | Label do individuo na ontologia | 
+| dataType | Tipo de dado da propriedade na ontologia | 
+| damainId | ID do dominio da propriedade na ontologia  | 
+| domainLabel | Label do dominio da propriedade na ontologia  | 
+| uri | URI do individuo na ontologia  | 
+| description | Descricao do individuo na ontologia  | 
 
 Response:
 
