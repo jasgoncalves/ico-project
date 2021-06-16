@@ -72,6 +72,40 @@ Atualmente a aplicacao apenas possui uma selecao de 9 operadores relacionais, qu
 | swrlb:booleanNot | Satisfied iff the first argument is true and the second argument is false, or vice versa. | 
 | sameAs | Determine if individuals refer to the same underlying individual | 
 
+### Configuracao Motor Base de Dados
+
+Como demonstrado atualmente a aplicacao esta a utilizar o motor de base de dados H2. Como tambem explicado a arquitetura implementada em conjunto com o padrao de desenho Repository, facilmente conseguimos substituir o motor de base de dados por outro. Com o suporte do Hibernate e com as configuracoes corretas a aplicacao fica pronta a ser utilizada com o novo motor de base de dados sem qualquer alteracao adicional.
+
+No modulo `infrastructure` existe uma classe (`Bootstraper.kt`) onde e possivel parametrizar o motor de base de dados.
+
+```JAVA
+
+    @Bean
+    public DataSource dataSource() {
+        BasicDataSource dataSource = new BasicDataSource();
+        dataSource.setDriverClassName("org.h2.Driver");
+//        dataSource.setUrl("jdbc:h2:tcp://localhost/~/semantic;DB_CLOSE_DELAY=-1;INIT=CREATE SCHEMA IF NOT EXISTS SEMANTICA");
+        dataSource.setUrl("jdbc:h2:mem:semantic;DB_CLOSE_DELAY=-1;INIT=CREATE SCHEMA IF NOT EXISTS SEMANTICA");
+        dataSource.setUsername("sa");
+        dataSource.setPassword("sa");
+
+        return dataSource;
+    }
+    
+    private final Properties hibernateProperties() {
+        Properties hibernateProperties = new Properties();
+        hibernateProperties.setProperty(
+                "hibernate.hbm2ddl.auto", "update");
+        hibernateProperties.setProperty(
+                "hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+        hibernateProperties.setProperty(
+                "hibernate.show_sql", "true");
+
+        return hibernateProperties;
+    }
+
+```
+
 
 ## Endpoints
 
