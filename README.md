@@ -39,6 +39,8 @@ Linguagem:
 
 [GET] /semantic/api/v1/classes - Retorna todas as classes que compoe a ontologia.
 
+Classes são grupos abstratos, conjuntos ou coleções de objetos. Eles podem conter indivíduos, outras classes, ou uma combinação de ambos.
+
 | Nome da Propriedade  | Descricao  |
 |---|---|
 | id | ID da classe na ontologia | 
@@ -67,6 +69,8 @@ Response:
 ```
 
 [GET] /semantic/api/v1/individuals - Retorna todos individuos que compoe a ontologia.
+
+Indivíduos são os componentes básicos de uma ontologia. Os indivíduos em uma ontologia podem incluir objetos concretos como pessoas, animais, mesas, automóveis, moléculas, planetas, assim como indivíduos abstratos como números e palavras.
 
 | Nome da Propriedade  | Descricao  |
 |---|---|
@@ -103,6 +107,8 @@ Response:
 
 [GET] /semantic/api/v1/object-properties - Retorna todas as _object properties_ que compoe a ontologia.
 
+As formas como os objetos podem se relacionar com outros objetos.
+
 | Nome da Propriedade  | Descricao  |
 |---|---|
 | id | ID da propriedade na ontologia | 
@@ -136,6 +142,8 @@ Response:
 ```
 
 [GET] /semantic/api/v1/datatype-properties - Retorna todas as _datatype properties_ que compoe a ontologia.
+
+Propriedades, características ou parâmetros que os objetos podem ter e compartilhar;
 
 | Nome da Propriedade  | Descricao  |
 |---|---|
@@ -172,15 +180,13 @@ Response:
 
 [GET] /semantic/api/v1/relational-operators - Retorna todas a lista de operadores relacionais SWRL diponiveis na API que compoe a ontologia.
 
+Operadores relacionais (ou mais precisamente SWRL Built-In) são predicados definidos pelo usuário que podem ser usados em regras SWRL.
+
 | Nome da Propriedade  | Descricao  |
 |---|---|
-| id | ID do individuo na ontologia | 
-| label | Label do individuo na ontologia | 
-| dataType | Tipo de dado da propriedade na ontologia | 
-| damainId | ID do dominio da propriedade na ontologia  | 
-| domainLabel | Label do dominio da propriedade na ontologia  | 
-| uri | URI do individuo na ontologia  | 
-| description | Descricao do individuo na ontologia  | 
+| id | ID do operador realcional | 
+| label | Label do operador realcional | 
+| description | Descricao do operador realcional | 
 
 Response:
 
@@ -201,6 +207,27 @@ Response:
 }
 ```
 
+[POST] /semantic/api/v1/sqrwl/query/run - Executa um query com base nos dados fornecidos no corpo do _request_.
 
+| Nome da Propriedade  | Descricao  |
+|---|---|
+| name | Nome do query a ser executado | 
+| query_parameters.entity_type | Tipo de entidade. (Class, Individuals, ObjectProperty, DatatypeProperty, Literal, RelationalOperator | 
+| query_parameters.entity | Id da entidade na ontologia | 
+| query_parameters.name | Nome da propriedade a ser retornada na response deste request |
+| query_parameters.is_ordered_by | Se o resultado deve ser ordenado por esta entidade. (true, false) |
+| query_parameters.is_column_showed | Se esta propriedade devera ser retornada na response. (true, false) |
+| query_parameters.args | Com excepcao do tipo de entidade Literal, que o conteudo do array e o valor literal desta entidade, as restantes entidades o valor corresponde ao valor da variavel no query|
+
+
+
+
+
+
+### Referencias
+
+* https://www.w3.org/Submission/SWRL/
+* https://pt.wikipedia.org/wiki/Ontologia_(ci%C3%AAncia_da_computa%C3%A7%C3%A3o)
+* https://github.com/protegeproject/swrlapi/wiki/SQWRLQueryAPI
 
 
