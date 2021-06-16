@@ -219,6 +219,62 @@ Response:
 | query_parameters.is_column_showed | Se esta propriedade devera ser retornada na response. (true, false) |
 | query_parameters.args | Com excepcao do tipo de entidade Literal, que o conteudo do array e o valor literal desta entidade, as restantes entidades o valor corresponde ao valor da variavel no query|
 
+Request:
+
+```JSON
+{
+    "name": "SchedulingProblem",
+    "query_parameters": [
+        {
+            "entity_type": "Class",
+            "entity": "SchedulingProblem",
+            "name": "SchedulingProblem",
+            "is_ordered_by": false,
+            "is_column_showed": true,
+            "args": [
+                "m"
+            ]
+        }
+    ]
+}
+```
+
+| Nome da Propriedade  | Descricao  |
+|---|---|
+| result | Resultado retornado apos execucao do query | 
+| rows | Numero de registos retornados | 
+| swrlquery | Query executado no servidor | 
+
+Response:
+
+```JSON
+{
+    "data": {
+        "result": [
+            {
+                "SchedulingProblem": "myspecificproblem"
+            },
+            {
+                "SchedulingProblem": "totalWeightedCompletionTime"
+            },
+            {
+                "SchedulingProblem": "discountedTotalWeightedCompletionTime"
+            },
+            {
+                "SchedulingProblem": "totalWeightedTardiness"
+            }
+        ],
+        "rows": 4,
+        "swrlquery": "scheduling:SchedulingProblem(?m) -> sqwrl:select(?m) ^ sqwrl:columnNames(\"SchedulingProblem\")"
+    },
+    "error": {
+        "statusCode": 200,
+        "statusDescription": "200 OK",
+        "description": "Success"
+    }
+}
+```
+
 
 
 
