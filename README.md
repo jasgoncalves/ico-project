@@ -68,7 +68,7 @@ Response:
 }
 ```
 
-[GET] /semantic/api/v1/individuals - Retorna todos individuos que compoe a ontologia.
+**[GET]** /semantic/api/v1/individuals - Retorna todos individuos que compoe a ontologia.
 
 Indivíduos são os componentes básicos de uma ontologia. Os indivíduos em uma ontologia podem incluir objetos concretos como pessoas, animais, mesas, automóveis, moléculas, planetas, assim como indivíduos abstratos como números e palavras.
 
@@ -105,7 +105,7 @@ Response:
 }
 ```
 
-[GET] /semantic/api/v1/object-properties - Retorna todas as _object properties_ que compoe a ontologia.
+**[GET]** /semantic/api/v1/object-properties - Retorna todas as _object properties_ que compoe a ontologia.
 
 As formas como os objetos podem se relacionar com outros objetos.
 
@@ -141,7 +141,7 @@ Response:
 }
 ```
 
-[GET] /semantic/api/v1/datatype-properties - Retorna todas as _datatype properties_ que compoe a ontologia.
+**[GET]** /semantic/api/v1/datatype-properties - Retorna todas as _datatype properties_ que compoe a ontologia.
 
 Propriedades, características ou parâmetros que os objetos podem ter e compartilhar;
 
@@ -178,7 +178,7 @@ Response:
 }
 ```
 
-[GET] /semantic/api/v1/relational-operators - Retorna todas a lista de operadores relacionais SWRL diponiveis na API que compoe a ontologia.
+**[GET]** /semantic/api/v1/relational-operators - Retorna todas a lista de operadores relacionais SWRL diponiveis na API que compoe a ontologia.
 
 Operadores relacionais (ou mais precisamente SWRL Built-In) são predicados definidos pelo usuário que podem ser usados em regras SWRL.
 
@@ -207,7 +207,7 @@ Response:
 }
 ```
 
-[POST] /semantic/api/v1/sqrwl/query/run - Executa um query com base nos dados fornecidos no corpo do _request_.
+**[POST]** /semantic/api/v1/sqrwl/query/run - Executa um query com base nos dados fornecidos no corpo do _request_.
 
 | Nome da Propriedade  | Descricao  |
 |---|---|
@@ -270,6 +270,55 @@ Response:
     "error": {
         "statusCode": 200,
         "statusDescription": "200 OK",
+        "description": "Success"
+    }
+}
+```
+
+**[POST]** /semantic/api/v1/sqrwl/query - Guarda o querie resultado do parse ao request na base de dados.
+
+| Nome da Propriedade  | Descricao  |
+|---|---|
+| name | Nome do query a ser executado | 
+| query_parameters.entity_type | Tipo de entidade. (Class, Individuals, ObjectProperty, DatatypeProperty, Literal, RelationalOperator | 
+| query_parameters.entity | Id da entidade na ontologia | 
+| query_parameters.name | Nome da propriedade a ser retornada na response deste request |
+| query_parameters.is_ordered_by | Se o resultado deve ser ordenado por esta entidade. (true, false) |
+| query_parameters.is_column_showed | Se esta propriedade devera ser retornada na response. (true, false) |
+| query_parameters.args | Com excepcao do tipo de entidade Literal, que o conteudo do array e o valor literal desta entidade, as restantes entidades o valor corresponde ao valor da variavel no query|
+
+Request:
+
+```JSON
+{
+    "name": "SchedulingProblem",
+    "query_parameters": [
+        {
+            "entity_type": "Class",
+            "entity": "SchedulingProblem",
+            "name": "SchedulingProblem",
+            "is_ordered_by": false,
+            "is_column_showed": true,
+            "args": [
+                "m"
+            ]
+        }
+    ]
+}
+```
+
+| Nome da Propriedade  | Descricao  |
+|---|---|
+| data | id do query guardado na base de dados | 
+
+Response:
+
+```JSON
+{
+    "data": "2337fc16-5151-443e-96c5-041c55165235",
+    "error": {
+        "statusCode": 201,
+        "statusDescription": "201 CREATED",
         "description": "Success"
     }
 }
