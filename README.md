@@ -51,6 +51,28 @@ No modulo `infrastructure` existe uma classe (`InfrastrutureConfig.kt`) que perm
 | ONTOLOGY_PREFIX | Prefixo a ser utilizado na ontologia  | 
 | ONTOLOGY_RESOURCE_FILE | Nome do ficheiro OWL guardado na pasta resources da camada `infrastructure` e que podera ser utilizado no caso do paramtero `USE_URL` e igual a `false` | 
 
+![image](https://user-images.githubusercontent.com/33223967/122306742-ef7f9e80-cf00-11eb-895e-aa4b4618206d.png)
+
+
+### Operadores Relacionais
+
+Atualmente a aplicacao apenas possui uma selecao de 9 operadores relacionais, que estao guardados no ficheiro `builtinswrl.csv` na pasta `resources` do modulo `infrastucture`, poderao ser adicionados novos operadores desde que os mesmos nao utilizem mais de duas variaveis, pois a versao atual da aplicacao apenas consegue lidar com duas variaveis.
+
+![image](https://user-images.githubusercontent.com/33223967/122307115-9bc18500-cf01-11eb-8824-33d5453da96e.png)
+
+| Nome  | Descricao  |
+|---|---|
+| swrlb:equal | Satisfied iff the first argument and the second argument are the same. | 
+| swrlb:notEqual | The negation of swrlb:equal. | 
+| swrlb:lessThan | Satisfied iff the first argument and the second argument are both in some implemented type and the first argument is less than the second argument according to a type-specific ordering (partial or total), if there is one defined for the type. The ordering function for the type of untyped literals is the partial order defined as string ordering when the language tags are the same (or both missing) and incomparable otherwise.;
+  | 
+| swrlb:lessThanOrEqual | Either less than, as above, or equal, as above. | 
+| swrlb:greaterThan | Similarly to swrlb:lessThan. | 
+| swrlb:greaterThanOrEqual | Similarly to swrlb:lessThanOrEqual. | 
+| swrlb:stringEqualIgnoreCase | Satisfied iff the first argument is the same as the second argument (upper/lower case ignored)  | 
+| swrlb:booleanNot | Satisfied iff the first argument is true and the second argument is false, or vice versa. | 
+| sameAs | Determine if individuals refer to the same underlying individual | 
+
 
 ## Endpoints
 
