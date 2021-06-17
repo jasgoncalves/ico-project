@@ -1,18 +1,17 @@
-package iscte.ico.semantic.presentation
+package iscte.ico.semantic.application
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.ComponentScan
 
 @SpringBootApplication(scanBasePackages = [
-    "iscte.ico.*" ,
-    "iscte.ico.semantic.application.*"]
+    "iscte.ico.*" ]
 )
 @ComponentScan("iscte.ico.semantic")
-class PresentationApplication
+open class RunApplication
 
     fun main(args: Array<String>) {
 
-        runApplication<PresentationApplication>(*args)
-
+        runApplication<RunApplication>(*args)
 }
+
