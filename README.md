@@ -160,37 +160,6 @@ A propriedade `args` e a propriedade mais complexa do corpo do request para exec
 }
 ```
 
-2. No uso do ObjectProperty a propriedade `args` podera conter duas variaveis, ambas representam os individuos do OWL.
-
-```JSON
-{
-    "name": "",
-    "query_parameters": [
-        {
-            "entity_type": "Class",
-            "entity": "OWLClass_9598b33d_f57f_4f27_942e_fa47ade955e3",
-            "name": "Reseracher",
-            "is_ordered_by": false,
-            "is_column_showed": true,
-            "args": [
-                "z"
-            ]
-        },
-        {
-            "entity_type": "ObjectProperty",
-            "entity": "OWLObjectProperty_95ca6fad_b96f_472a_97ed_92795d67fd2c",
-            "name": "hasAuthor",
-            "is_ordered_by": false,
-            "is_column_showed": true,
-            "args": [
-               
-                "y", "z"
-            ]
-        }
-    ]
-}
-```
-
 3. No uso do DataProperty, tal como no item anterior, a propriedade `args` podera conter duas variaveis, a primeira variavel representara o individuo OWL e a segunda o valor do dado.
 
 ```JSON
@@ -301,8 +270,45 @@ DatatypeProperty
     ]
 }
 ```
-5. 
-6. 
+5. No entidade do tipo Literal a propriedade `args` nao contem o valor da variavel que representa a entidade, mas sim o valor que esta entidade representa.
+
+```JSON
+{
+    "name": "Wich order relations have been proposed to many-objective optimisation?",
+    "query_parameters": [
+        {
+            "entity_type": "Class",
+            "entity": "OWLClass_78aa5e30_4a52_440d_b144_1b2414334f9e",
+            "name": "MetaHeuristic",
+            "is_ordered_by": false,
+            "is_column_showed": true,
+            "args": [
+                "x"
+            ]
+        },
+        {
+            "entity_type": "DatatypeProperty",
+            "entity": "OWLDataProperty_eaa7d01d_6083_4b47_a247_2ebebcbd2837",
+            "name": "isManyObjectiveProblem",
+            "is_ordered_by": false,
+            "is_column_showed": true,
+            "args": [
+                "z"
+            ]
+        },
+        {
+            "entity_type": "Literal",
+            "entity": "OWLDataProperty_eaa7d01d_6083_4b47_a247_2ebebcbd2837",
+            "name": "Literal",
+            "is_ordered_by": false,
+            "is_column_showed": false,
+            "args": [
+                "true"
+            ]
+        }
+    ]
+}
+```
 
 ## Endpoints
 
