@@ -33,8 +33,8 @@ public class Bootstraper {
     public DataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUrl("jdbc:h2:tcp://localhost/~/semantic;DB_CLOSE_DELAY=-1;INIT=CREATE SCHEMA IF NOT EXISTS SEMANTICA");
-//        dataSource.setUrl("jdbc:h2:mem:semantic;DB_CLOSE_DELAY=-1;INIT=CREATE SCHEMA IF NOT EXISTS SEMANTICA");
+//        dataSource.setUrl("jdbc:h2:tcp://localhost/~/semantic;DB_CLOSE_DELAY=-1;INIT=CREATE SCHEMA IF NOT EXISTS SEMANTICA");
+        dataSource.setUrl("jdbc:h2:mem:semantic;DB_CLOSE_DELAY=-1;INIT=CREATE SCHEMA IF NOT EXISTS SEMANTICA");
         dataSource.setUsername("sa");
         dataSource.setPassword("sa");
 
